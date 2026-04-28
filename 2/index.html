@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sổ Tay Lý Luận Về Nhà Nước Và Pháp Luật - Ngày 2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Các biến mặc định cho Desktop */
+            --grid-size: 32px;
+            --page-padding-left: 75px;
+            --page-padding-right: 30px;
+            --margin-line-pos: 65px;
+            --base-font-size: 20px;
+            --h1-size: 26px;
+            --h2-size: 22px;
+            
+            /* Màu sắc */
+            --blue-pen: #1a56db;
+            --red-pen: #d32f2f;
+            --green-pen: #2e7d32;
+            --grid-line: #e4eaf5;
+            --margin-line: #ff9999;
+            --highlight: #ffeba1;
+            --dashed-line: #9bc1ff;
+        }
+
+        /* Tối ưu riêng cho màn hình điện thoại (dưới 768px) */
+        @media (max-width: 768px) {
+            :root {
+                --grid-size: 28px;
+                --page-padding-left: 40px;
+                --page-padding-right: 15px;
+                --margin-line-pos: 30px;
+                --base-font-size: 18px;
+                --h1-size: 22px;
+                --h2-size: 20px;
+            }
+        }
+
+        body {
+            margin: 0;
+            padding: 10px;
+            background-color: #d1d5db; 
+            font-family: 'Patrick Hand', cursive, sans-serif;
+            font-size: var(--base-font-size);
+            color: var(--blue-pen);
+            line-height: var(--grid-size); 
+        }
+
+        @media (min-width: 769px) {
+            body { padding: 20px; }
+        }
+
+        /* Khung trang giấy */
+        .notebook-page {
+            background-color: #fefefe;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            padding: calc(var(--grid-size) * 1) var(--page-padding-right) calc(var(--grid-size) * 2) var(--page-padding-left);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-radius: 4px;
+            overflow-x: hidden;
+            
+            /* Tạo lưới ô ly vuông */
+            background-image:
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: var(--grid-size) var(--grid-size);
+            background-position: 0 10px; 
+        }
+
+        /* Đường kẻ lề màu đỏ */
+        .notebook-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: var(--margin-line-pos);
+            width: 1px;
+            background-color: var(--margin-line);
+            z-index: 1;
+        }
+
+        /* Miếng băng dính dán góc */
+        .tape {
+            position: absolute;
+            top: 15px;
+            right: 40px;
+            width: 80px;
+            height: 25px;
+            background-color: rgba(200, 200, 200, 0.5);
+            transform: rotate(-6deg);
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .tape {
+                width: 60px;
+                right: 20px;
+                top: 10px;
+                height: 20px;
+            }
+        }
+
+        /* Lớp chứa nội dung */
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .date {
+            text-align: right;
+            color: #8899a6;
+            font-style: italic;
+            font-size: calc(var(--base-font-size) - 2px);
+            margin-bottom: calc(var(--grid-size) * 1);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--red-pen);
+            text-transform: uppercase;
+            font-weight: normal;
+            font-size: var(--h1-size);
+            letter-spacing: 1px;
+            margin: 0 0 calc(var(--grid-size) * 1) 0;
+            text-decoration: underline;
+            text-decoration-style: dashed;
+            text-underline-offset: 4px;
+            line-height: calc(var(--grid-size) * 1.5);
+        }
+
+        h2 {
+            color: var(--green-pen);
+            font-style: italic;
+            text-transform: uppercase;
+            font-weight: normal;
+            font-size: var(--h2-size);
+            margin: calc(var(--grid-size) * 1) 0 0 0;
+            display: inline-block;
+            border-bottom: 2px solid var(--green-pen);
+            line-height: calc(var(--grid-size) - 2px);
+        }
+
+        p, div {
+            margin: 0;
+        }
+
+        .arrow-item {
+            margin-top: 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .arrow {
+            color: var(--red-pen);
+            font-weight: bold;
+            margin-right: 8px;
+            font-size: var(--h2-size);
+        }
+
+        mark {
+            background-color: var(--highlight);
+            color: var(--blue-pen);
+            font-family: inherit;
+            padding: 0 4px;
+            border-radius: 3px;
+        }
+
+        .bold { font-weight: bold; }
+        .bold-blue { font-weight: bold; color: var(--blue-pen); }
+
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+            margin: 0 0 0 10px;
+            border-left: 2px dashed var(--dashed-line);
+        }
+
+        @media (max-width: 768px) {
+            ul {
+                padding-left: 15px; 
+                margin-left: 5px;
+            }
+        }
+
+        li { position: relative; }
+        li::before {
+            content: '- ';
+            position: absolute;
+            left: -15px;
+        }
+
+        .divider {
+            text-align: center;
+            color: #ccc;
+            letter-spacing: 3px;
+            margin: calc(var(--grid-size) * 0.5) 0;
+            font-family: monospace;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .mindmap-container {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: rgba(255, 235, 161, 0.15); 
+            border: 2px dashed var(--dashed-line);
+            border-radius: 10px;
+            text-align: center;
+            overflow-x: auto; 
+            -webkit-overflow-scrolling: touch; 
+        }
+
+        .practice-box {
+            background-color: rgba(26, 86, 219, 0.05);
+            border-left: 4px solid var(--blue-pen);
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .q-title {
+            font-weight: bold;
+            color: var(--blue-pen);
+            margin-top: 10px;
+            line-height: var(--grid-size);
+        }
+        .q-ans-true { color: var(--green-pen); font-weight: bold; }
+        .q-ans-false { color: var(--red-pen); font-weight: bold; }
+        
+        h3 {
+            color: var(--red-pen);
+            font-family: 'Patrick Hand', cursive;
+            font-size: var(--h2-size);
+            text-decoration: underline;
+            text-decoration-style: dashed;
+            margin-top: var(--grid-size);
+            margin-bottom: 0;
+            line-height: calc(var(--grid-size) * 1.5);
+        }
+    </style>
+</head>
+<body>
+
+<div class="notebook-page">
+    <div class="tape"></div>
+    <div class="content">
+        <div class="date">Ngày học: 28/04/2026</div>
+        
+        <h1>SỔ TAY NỘI DUNG CHI TIẾT (NGÀY 2)</h1>
+
+        <!-- BÀI 6 -->
+        <h2>I. LÝ THUYẾT 1: BÀI 6 - CHỨC NĂNG NHÀ NƯỚC</h2>
+        
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold"><mark>1. Khái niệm chức năng nhà nước:</mark></span> Chức năng nhà nước là những phương hướng, phương diện, mặt hoạt động chủ yếu của Nhà nước nhằm thực hiện các nhiệm vụ đặt ra trước Nhà nước.</div>
+        </div>
+        <ul>
+            <li><span class="bold-blue">Tính khách quan:</span> Chức năng nhà nước được hình thành một cách khách quan dưới tác động chủ đạo của nhiệm vụ nhà nước.</li>
+            <li><span class="bold-blue">Tính chủ quan:</span> Chức năng nhà nước phản ánh hoạt động của nhà nước có tính độc lập tương đối trong mối quan hệ với cơ sở kinh tế xã hội.</li>
+        </ul>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">2. Các mối quan hệ của chức năng nhà nước:</span></div>
+        </div>
+        <ul>
+            <li><span class="bold-blue">Với nhiệm vụ của Nhà nước:</span> Nhiệm vụ là mục tiêu cần đạt được, vấn đề phải giải quyết. Nhiệm vụ chiến lược là cơ sở xác định số lượng, nội dung, vị trí các chức năng và tác động lên hình thức, phương pháp thực hiện chức năng. Chức năng là phương diện thực hiện nhiệm vụ.</li>
+            <li><span class="bold-blue">Với bản chất nhà nước:</span> Đây là mối quan hệ giữa hình thức và nội dung, trong đó chức năng thuộc hình thức còn bản chất thuộc nội dung. Chức năng là sự biểu hiện ra bên ngoài thuộc tính cơ bản và bản chất của nhà nước.</li>
+            <li><span class="bold-blue">Với bộ máy nhà nước:</span> Nhiệm vụ và chức năng được thực hiện chủ yếu bằng bộ máy nhà nước. Bộ máy được xây dựng nhằm thực hiện chức năng của nhà nước.</li>
+        </ul>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">3. Phân loại chức năng nhà nước:</span></div>
+        </div>
+        <ul>
+            <li><span class="bold-blue">Theo cách thức thực hiện quyền lực:</span> Chức năng lập pháp, hành pháp và tư pháp.</li>
+            <li><span class="bold-blue">Theo vị trí vai trò:</span> Chức năng cơ bản và chức năng không cơ bản.</li>
+            <li><span class="bold-blue">Theo thời gian hoạt động:</span> Chức năng lâu dài và chức năng tạm thời (trước mắt).</li>
+            <li><span class="bold-blue">Theo lĩnh vực hoạt động:</span> Chức năng kinh tế, chức năng xã hội.</li>
+            <li><span class="bold-blue">Theo phạm vi hoạt động chủ yếu (Phổ biến nhất):</span> Chức năng đối nội và chức năng đối ngoại.</li>
+        </ul>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">4. Những yếu tố ảnh hưởng đến chức năng nhà nước:</span></div>
+        </div>
+        <ul>
+            <li>Cơ sở kinh tế.</li>
+            <li>Sự biến đổi của đời sống xã hội, kết cấu giai cấp, tương quan lực lượng giai cấp, tầng lớp, dân tộc, tôn giáo.</li>
+            <li>Trách nhiệm của nhà nước trong việc xác định mức độ can thiệp vào các lĩnh vực xã hội.</li>
+            <li>Hoàn cảnh quốc tế và hợp tác quốc tế.</li>
+        </ul>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">5. Hình thức, phương pháp thực hiện chức năng nhà nước:</span></div>
+        </div>
+        <ul>
+            <li><span class="bold-blue">Hình thức:</span> Gồm Hình thức pháp lý (hình thức cơ bản) và Hình thức tổ chức (phương thức đặc thù, bổ sung cùng phương thức pháp luật để hoạt động nhịp nhàng, hiệu quả).</li>
+            <li><span class="bold-blue">Phương pháp:</span> Là những cách thức mà Nhà nước sử dụng để tiến hành các hoạt động thực hiện chức năng. Nhà nước thường sử dụng hai phương pháp chủ yếu là thuyết phục và cưỡng chế.</li>
+        </ul>
+
+        <!-- BÀI TẬP BÀI 6 -->
+        <div class="practice-box">
+            <div class="bold-blue" style="text-decoration: underline;">📝 VẬN DỤNG NHANH BÀI 6 (Phần B4: Chức Năng Nhà Nước):</div>
+            <div style="font-style: italic; color: var(--red-pen); font-size: 16px;">(Quy tắc vàng: Đọc kỹ đáp án giải thích, sai câu nào giở lại phần lý thuyết tương ứng ở trên để tra cứu ngay lập tức).</div>
+
+            <div class="q-title">Sự biến đổi của nhiệm vụ sẽ dẫn đến sự biến đổi chức năng của nhà nước.</div>
+            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 6]</span> Vì nhiệm vụ có trước và nội dung và tính chất của nhiệm vụ quyết định số lượng, cách thức thực hiện chức năng để hoàn thành nhiệm vụ đó.</div>
+
+            <div class="q-title">Vì nhiệm vụ quyết định chức năng của nhà nước nên chức năng nhà nước không tác động đến nhiệm vụ.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 6]</span> Chức năng là những phương diện, mặt hoạt động cơ bản để thực hiện nhiệm vụ và do vậy ảnh hưởng đến khả năng hoàn thành nhiệm vụ.</div>
+
+            <div class="q-title">Nhiệm vụ của Nhà nước xuất hiện do ý chí chủ quan của con người và sự vận động khách quan của xã hội.</div>
+            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 6]</span> Để xác định chức năng, nhiệm vụ nhà nước phải dựa trên những cơ sở khách quan, khoa học, phải căn cứ vào điều kiện kinh tế, chính trị, xã hội không được mơ hồ, lý tưởng hóa và phải mang tính toàn diện, có khả năng trở thành hiện thực.</div>
+
+            <div class="q-title">Chức năng của nhà nước và của cơ quan nhà nước hình thành là kết quả của quá trình thiết lập bộ máy nhà nước.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 6]</span> Chức năng của cơ quan nhà nước là phương diện hoạt động của cơ quan nhà nước đó và phụ thuộc vào chức năng nhà nước. Đối với chức năng nhà nước là phương diện hoạt động chủ yếu của bộ máy nhà nước, trên cơ sở chức năng nhà nước, giai cấp thống trị thiết lập ra bộ máy nhà nước.</div>
+
+            <div class="q-title">Cơ quan nhà nước xuất hiện, sau đó chức năng được xác định cho cơ quan này và cuối cùng, nhiệm vụ được giao để nó thực hiện.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 6]</span> Một quy trình đúng là: (1) Xác định nhiệm vụ -> (2) Xác định chức năng -> (3) Tổ chức bộ máy nhà nước bao gồm các cơ quan nhà nước để đảm nhận các hoạt động đó.</div>
+
+            <div class="q-title">Chức năng nhà nước không thể thay đổi.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 6]</span> Cùng với sự phát triển của XH, có chức năng mất đi, có chức năng thay đổi về nội dung, có chức năng mới xuất hiện. Chức năng nhà nước không phải là bất biến ngay cả khi bản chất nhà nước không thay đổi.</div>
+        </div>
+
+        <div class="arrow-item" style="margin-top: 20px;">
+            <span class="arrow">➔</span>
+            <div><span class="bold"><mark>Tổng kết Mindmap Bài 6:</mark></span></div>
+        </div>
+        <div class="mindmap-container">
+<pre class="mermaid">
+mindmap
+  root((Chức năng<br/>Nhà nước))
+    Đặc điểm
+      Tính khách quan
+      Tính chủ quan
+    Mối quan hệ
+      Với Nhiệm vụ
+      Với Bản chất
+      Với Bộ máy
+    Phân loại
+      Cách thức quyền lực
+        Lập pháp
+        Hành pháp
+        Tư pháp
+      Phạm vi hoạt động
+        Đối nội
+        Đối ngoại
+    Phương pháp
+      Thuyết phục
+      Cưỡng chế
+</pre>
+        </div>
+
+        <div class="divider">---------------------------------------------------</div>
+
+        <!-- BÀI 7 -->
+        <h2>II. LÝ THUYẾT 2: BÀI 7 - BỘ MÁY NHÀ NƯỚC</h2>
+        
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold"><mark>1. Khái niệm bộ máy nhà nước:</mark></span> Bộ máy nhà nước được hiểu là hệ thống các cơ quan nhà nước từ trung ương xuống địa phương được tổ chức theo những nguyên tắc chung thống nhất, tạo thành cơ chế đồng bộ để thực hiện các chức năng và nhiệm vụ của nhà nước.</div>
+        </div>
+        <ul>
+            <li>Vai trò của bộ máy nhà nước là phương tiện, công cụ để thực hiện các chức năng và nhiệm vụ của nhà nước.</li>
+        </ul>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">2. Cơ quan nhà nước:</span> Là một bộ phận cấu thành nên bộ máy nhà nước. Đó là một tổ chức chính trị mang quyền lực nhà nước, được thành lập trên cơ sở pháp luật và được giao những nhiệm vụ, quyền hạn nhất định để thực hiện chức năng và nhiệm vụ của nhà nước trong phạm vi luật định.</div>
+        </div>
+        <ul>
+            <li><span class="bold-blue">Phân loại theo hình thức pháp lý:</span> Cơ quan lập pháp, cơ quan hành pháp và cơ quan tư pháp.</li>
+            <li><span class="bold-blue">Phân loại theo cấp độ thẩm quyền:</span> Cơ quan nhà nước ở Trung ương và địa phương.</li>
+        </ul>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">3. Nguyên tắc tổ chức và hoạt động:</span></div>
+        </div>
+        <ul>
+            <li><span class="bold-blue">Nguyên tắc tập quyền:</span> Tập trung quyền lực nhà nước vào trong tay một người hay một cơ quan nào đó.</li>
+            <li><span class="bold-blue">Nguyên tắc phân quyền (phân chia quyền lực):</span> Quyền lực nhà nước được phân thành các bộ phận khác nhau và giao cho các cơ quan nhà nước khác nhau nắm giữ.</li>
+        </ul>
+
+        <!-- BÀI TẬP BÀI 7 -->
+        <div class="practice-box">
+            <div class="bold-blue" style="text-decoration: underline;">📝 VẬN DỤNG NHANH BÀI 7 (Phần B3: Bộ Máy Nhà Nước):</div>
+            <div style="font-style: italic; color: var(--red-pen); font-size: 16px;">(Quy tắc vàng: Đọc kỹ đáp án giải thích, sai câu nào giở lại phần lý thuyết tương ứng ở trên để tra cứu ngay lập tức).</div>
+
+            <div class="q-title">Cơ quan lập pháp là cơ quan đại diện.</div>
+            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 7]</span> Là cơ quan đại diện theo thành phần cư dân, thể hiện ý chí và bảo vệ lợi ích của nhân dân, thực hiện chức năng xây dựng pháp luật.</div>
+
+            <div class="q-title">Bộ máy nhà nước có tính hệ thống chặt chẽ.</div>
+            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 7]</span> Theo khái niệm BMNN là hệ thống các cơ quan nhà nước từ trung ương xuống địa phương được tổ chức theo những nguyên tắc chung, thống nhất tạo thành một cơ chế đồng bộ để thực hiện nhiệm vụ và các chức năng của nhà nước.</div>
+
+            <div class="q-title">Cơ quan đại diện là cơ quan lập pháp.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 7]</span> Vì cơ quan đại diện là cơ quan do nhân dân trực tiếp bầu ra thay mặt nhân dân thực hiện quyền lực nhà nước. Do vậy cơ quan đại diện lại thường thực hiện chức năng lập pháp, chứ không phải cơ quan đại diện chính là cơ quan lập pháp.</div>
+
+            <div class="q-title">Bộ máy nhà nước thay đổi do sự thay đổi của điều kiện xã hội.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 7]</span> Tùy thuộc vào chức năng, nhiệm vụ của nhà nước như thế nào mà tổ chức ra bộ máy nhà nước tương ứng. Vì vậy, khi chức năng nhiệm vụ nhà nước thay đổi thì việc tổ chức bộ máy nhà nước cũng phải thay đổi.</div>
+
+            <div class="q-title">Các cơ quan nhà nước có tính hệ thống vì chúng được tổ chức theo các nguyên tắc nhất định.</div>
+            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 7]</span> Cơ quan nhà nước là bộ phận cấu thành nên bộ máy nhà nước. Đó là một tổ chức chính trị mang quyền lực nhà nước, được thành lập trên cơ sở pháp luật và được giao những nhiệm vụ, quyền hạn nhất định.</div>
+
+            <div class="q-title">Tòa án phải độc lập khi xét xử.</div>
+            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 7]</span> Vì chức năng của tòa án là giải quyết tranh chấp và xét xử. Trong hoạt động xét xử Tòa án chỉ căn cứ vào pháp luật và làm đúng theo các quy định của pháp luật, nghĩa là tòa án phải độc lập với các cơ quan khác.</div>
+
+            <div class="q-title">Trong tổ chức và hoạt động của Bộ máy nhà nước Tư sản chỉ áp dụng một nguyên tắc là: Tam quyền phân lập.</div>
+            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 7]</span> Vì điểm đặc trưng cơ bản của bộ máy nhà nước tư sản là nó được tổ chức theo nguyên tắc phân chia quyền lực nhà nước (tam quyền phân lập) có sự phân định chức năng, nhiệm vụ của các cơ quan nhà nước một cách rõ ràng.</div>
+
+            <div class="q-title">Hầu hết tòa án trong bộ máy nhà nước phải độc lập khi xét xử.</div>
+            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 7]</span> Trong hoạt động xét xử luôn áp dụng theo pháp luật và làm đúng theo các quy định của PL. Phải độc lập với các cơ quan khác, độc lập giữa thẩm quyền xét xử, cấp sơ thẩm, phúc thẩm; độc lập giữa thẩm phán với chánh án và thẩm phán tự mình dựa vào pháp luật để quyết định.</div>
+
+            <div class="q-title">Cơ sở kinh tế quyết định sự xuất hiện và phát triển của nhà nước nhưng nhà nước cũng sự độc lập nhất định đối với cơ sở kinh tế.</div>
+            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 7]</span> Cơ sở kinh tế quyết định đến việc tổ chức và hoạt động của BMNN. Nhà nước có thể kìm hãm hoặc thúc đẩy sự phát triển của nền kinh tế.</div>
+
+            <div class="q-title">Bộ máy nhà nước thực chất là tổng thể các cơ quan nhà nước từ trung ương đến địa phương.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 7]</span> Theo khái niệm bộ máy nhà nước được hiểu là "hệ thống" các cơ quan nhà nước từ trung ương xuống địa phương. Không phải là "tổng thể" các cơ quan.</div>
+
+            <div class="q-title">Một trong những yếu tố căn bản phân biệt cơ quan nhà nước với tổ chức xã hội là thẩm quyền của nó.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 7]</span> Đặc điểm cơ bản của cơ quan nhà nước phân biệt với các tổ chức khác trong xã hội đó chính là tính quyền lực của nhà nước. Thẩm quyền chỉ là phạm vi thực hiện quyền lực.</div>
+        </div>
+
+        <div class="arrow-item" style="margin-top: 20px;">
+            <span class="arrow">➔</span>
+            <div><span class="bold"><mark>Tổng kết Mindmap Bài 7:</mark></span></div>
+        </div>
+        <div class="mindmap-container">
+<pre class="mermaid">
+mindmap
+  root((Bộ máy<br/>Nhà nước))
+    Cơ quan Nhà nước
+      Tổ chức chính trị
+      Mang quyền lực NN
+    Phân loại
+      Theo Hình thức
+        Lập pháp
+        Hành pháp
+        Tư pháp
+      Theo Cấp độ
+        Trung ương
+        Địa phương
+    Nguyên tắc
+      Tập quyền
+      Phân quyền
+</pre>
+        </div>
+
+    </div>
+</div>
+
+<!-- Tích hợp Mermaid JS để vẽ Mindmap -->
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ 
+        startOnLoad: true, 
+        theme: 'base',
+        themeVariables: {
+            fontFamily: '"Patrick Hand", cursive', 
+            primaryColor: '#ffffff',
+            primaryTextColor: '#1a56db', 
+            primaryBorderColor: '#1a56db',
+            lineColor: '#d32f2f', 
+            secondaryColor: '#ffeba1', 
+            tertiaryColor: '#e4eaf5'
+        }
+    });
+</script>
+
+</body>
+</html>
