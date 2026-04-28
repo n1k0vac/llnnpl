@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sổ Tay Lý Luận Về Nhà Nước Và Pháp Luật - Chiều Ngày 2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --grid-size: 32px;
+            --page-padding-left: 75px;
+            --page-padding-right: 30px;
+            --margin-line-pos: 65px;
+            --base-font-size: 20px;
+            --h1-size: 26px;
+            --h2-size: 22px;
+            
+            --blue-pen: #1a56db;
+            --red-pen: #d32f2f;
+            --green-pen: #2e7d32;
+            --grid-line: #e4eaf5;
+            --margin-line: #ff9999;
+            --highlight: #ffeba1;
+            --dashed-line: #9bc1ff;
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --grid-size: 28px;
+                --page-padding-left: 40px;
+                --page-padding-right: 15px;
+                --margin-line-pos: 30px;
+                --base-font-size: 18px;
+                --h1-size: 22px;
+                --h2-size: 20px;
+            }
+        }
+
+        body {
+            margin: 0;
+            padding: 10px;
+            background-color: #d1d5db; 
+            font-family: 'Patrick Hand', cursive, sans-serif;
+            font-size: var(--base-font-size);
+            color: var(--blue-pen);
+            line-height: var(--grid-size); 
+        }
+
+        @media (min-width: 769px) {
+            body { padding: 20px; }
+        }
+
+        .notebook-page {
+            background-color: #fefefe;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            padding: calc(var(--grid-size) * 1) var(--page-padding-right) calc(var(--grid-size) * 2) var(--page-padding-left);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-radius: 4px;
+            overflow-x: hidden;
+            
+            background-image:
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: var(--grid-size) var(--grid-size);
+            background-position: 0 10px; 
+        }
+
+        .notebook-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: var(--margin-line-pos);
+            width: 1px;
+            background-color: var(--margin-line);
+            z-index: 1;
+        }
+
+        .tape {
+            position: absolute;
+            top: 15px;
+            right: 40px;
+            width: 80px;
+            height: 25px;
+            background-color: rgba(200, 200, 200, 0.5);
+            transform: rotate(-6deg);
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .tape {
+                width: 60px;
+                right: 20px;
+                top: 10px;
+                height: 20px;
+            }
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .date {
+            text-align: right;
+            color: #8899a6;
+            font-style: italic;
+            font-size: calc(var(--base-font-size) - 2px);
+            margin-bottom: calc(var(--grid-size) * 1);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--red-pen);
+            text-transform: uppercase;
+            font-weight: normal;
+            font-size: var(--h1-size);
+            letter-spacing: 1px;
+            margin: 0 0 calc(var(--grid-size) * 1) 0;
+            text-decoration: underline;
+            text-decoration-style: dashed;
+            text-underline-offset: 4px;
+            line-height: calc(var(--grid-size) * 1.5);
+        }
+
+        h2 {
+            color: var(--green-pen);
+            font-style: italic;
+            text-transform: uppercase;
+            font-weight: normal;
+            font-size: var(--h2-size);
+            margin: calc(var(--grid-size) * 1) 0 0 0;
+            display: inline-block;
+            border-bottom: 2px solid var(--green-pen);
+            line-height: calc(var(--grid-size) - 2px);
+        }
+
+        p, div { margin: 0; }
+
+        .arrow-item {
+            margin-top: 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .arrow {
+            color: var(--red-pen);
+            font-weight: bold;
+            margin-right: 8px;
+            font-size: var(--h2-size);
+        }
+
+        mark {
+            background-color: var(--highlight);
+            color: var(--blue-pen);
+            font-family: inherit;
+            padding: 0 4px;
+            border-radius: 3px;
+        }
+
+        .bold { font-weight: bold; }
+        .bold-blue { font-weight: bold; color: var(--blue-pen); }
+
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+            margin: 0 0 0 10px;
+            border-left: 2px dashed var(--dashed-line);
+        }
+
+        @media (max-width: 768px) {
+            ul {
+                padding-left: 15px; 
+                margin-left: 5px;
+            }
+        }
+
+        li { position: relative; }
+        li::before {
+            content: '- ';
+            position: absolute;
+            left: -15px;
+        }
+
+        .divider {
+            text-align: center;
+            color: #ccc;
+            letter-spacing: 3px;
+            margin: calc(var(--grid-size) * 0.5) 0;
+            font-family: monospace;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .mindmap-container {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: rgba(255, 235, 161, 0.15); 
+            border: 2px dashed var(--dashed-line);
+            border-radius: 10px;
+            text-align: center;
+            overflow-x: auto; 
+            -webkit-overflow-scrolling: touch; 
+        }
+
+        .practice-box {
+            background-color: rgba(26, 86, 219, 0.05);
+            border-left: 4px solid var(--blue-pen);
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .q-title {
+            font-weight: bold;
+            color: var(--blue-pen);
+            margin-top: 10px;
+            line-height: var(--grid-size);
+        }
+        .q-ans-true { color: var(--green-pen); font-weight: bold; }
+        .q-ans-false { color: var(--red-pen); font-weight: bold; }
+        
+        h3 {
+            color: var(--red-pen);
+            font-family: 'Patrick Hand', cursive;
+            font-size: var(--h2-size);
+            text-decoration: underline;
+            text-decoration-style: dashed;
+            margin-top: var(--grid-size);
+            margin-bottom: 0;
+            line-height: calc(var(--grid-size) * 1.5);
+        }
+    </style>
+</head>
+<body>
+
+<div class="notebook-page">
+    <div class="tape"></div>
+    <div class="content">
+        <div class="date">Ngày học: 28/04/2026 (Buổi Chiều)</div>
+        
+        <h1>🌤️ LÝ THUYẾT CHI TIẾT BUỔI CHIỀU (NGÀY 2)</h1>
+
+        <!-- BÀI 8 -->
+        <h2>I. BÀI 8: HÌNH THỨC CỦA NHÀ NƯỚC</h2>
+        
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold"><mark>Khái niệm:</mark></span> Hình thức nhà nước là cách thức tổ chức quyền lực nhà nước và những phương pháp để thực hiện quyền lực nhà nước. Nó bao gồm 3 yếu tố:</div>
+        </div>
+
+        <ul>
+            <li><span class="bold-blue">Hình thức chính thể:</span> Thể hiện nguồn gốc quyền lực và cơ quan nắm giữ.
+                <ul>
+                    <li><span class="bold">Chính thể quân chủ:</span> Quyền lực được chuyển giao theo nguyên tắc thế tập. Tùy vào mức độ nắm giữ quyền lực mà chia thành quân chủ tuyệt đối (nắm toàn bộ 3 quyền) và quân chủ hạn chế (san sẻ quyền lực với các thiết chế khác).</li>
+                    <li><span class="bold">Chính thể cộng hòa:</span> Quyền lực tối cao thuộc về một hoặc một số cơ quan được hình thành bằng con đường bầu cử và có nhiệm kỳ.</li>
+                </ul>
+            </li>
+            <li><span class="bold-blue">Hình thức cấu trúc:</span> Là sự cấu tạo Nhà nước thành các đơn vị hành chính lãnh thổ và xác lập những mối quan hệ qua lại giữa chúng với nhau, giữa trung ương với địa phương.
+                <ul>
+                    <li><span class="bold">Nhà nước đơn nhất:</span> Lãnh thổ được hình thành từ một lãnh thổ duy nhất và chia thành các đơn vị hành chính trực thuộc. Chỉ có một chủ quyền quốc gia và một hệ thống cơ quan nhà nước thống nhất.</li>
+                    <li><span class="bold">Nhà nước liên bang:</span> Hợp thành từ hai hay nhiều nước thành viên. Có sự phân chia quyền lực và chủ quyền giữa liên bang và các bang thành viên.</li>
+                </ul>
+            </li>
+            <li><span class="bold-blue">Chế độ chính trị:</span> Là tổng thể các phương pháp, thủ đoạn mà các cơ quan nhà nước sử dụng để thực hiện quyền lực Nhà nước. Được chia thành phương pháp Dân chủ và Phản dân chủ.</li>
+        </ul>
+
+        <!-- VẬN DỤNG NHANH BÀI 8 -->
+        <div class="practice-box">
+            <div class="bold-blue" style="text-decoration: underline;">📝 Vận dụng nhanh Bài 8:</div>
+            
+            <div class="q-title">Trong hình thức chính thể quân chủ, người đứng đầu nhà nước nắm giữ cả ba quyền lực: quyền lập pháp, quyền hành pháp, quyền tư pháp.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Tùy thuộc vào khả năng nắm giữ quyền lực mà chia làm 2 loại. Quân chủ tuyệt đối thì người đứng đầu mới nắm giữ cả 3 quyền. Còn quân chủ hạn chế thì bên cạnh nhà vua còn có các thiết chế khác san sẻ quyền lực.</div>
+
+            <div class="q-title">Trong cấu trúc nhà nước đơn nhất không thể tồn tại khu tự trị.</div>
+            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Nhà nước đơn nhất chỉ có 1 chủ quyền quốc gia duy nhất và 1 hệ thống cơ quan nhà nước thống nhất từ trung ương xuống địa phương, cho nên không tồn tại khu tự trị.</div>
+
+            <div class="q-title">Chế độ chính trị của Nhà nước luôn phụ thuộc vào hình thức chính thể của Nhà nước.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Ba yếu tố (hình thức chính thể, hình thức cấu trúc, chế độ chính trị) có mối quan hệ tác động qua lại lẫn nhau tạo thành hình thức nhà nước. Hình thức chính thể và chế độ chính trị có mối quan hệ chặt chẽ chứ không phải luôn phụ thuộc một chiều.</div>
+        </div>
+
+        <div class="divider">---------------------------------------------------</div>
+
+        <!-- BÀI 9 -->
+        <h2>II. BÀI 9: NHÀ NƯỚC TRONG HỆ THỐNG CHÍNH TRỊ</h2>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">Khái niệm:</span> Hệ thống chính trị là tập hợp các thiết chế chính trị, chính trị - xã hội, có mối liên hệ chặt chẽ với nhau tạo thành một chỉnh thể thống nhất cùng tham gia vào việc thực hiện quyền lực chính trị.</div>
+        </div>
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">Vị trí của Nhà nước:</span> Nhà nước là trung tâm của hệ thống chính trị. Về mặt pháp lý, Nhà nước thiết lập khung khổ, cơ sở pháp lý cho sự tồn tại và phát triển của các thành phần trong hệ thống; thực hiện sự quản lý đối với các tổ chức và đóng vai trò bảo vệ pháp luật về hệ thống chính trị.</div>
+        </div>
+
+        <div class="divider">---------------------------------------------------</div>
+
+        <!-- BÀI 10 -->
+        <h2>III. BÀI 10: NHÀ NƯỚC XÃ HỘI CHỦ NGHĨA (XHCN)</h2>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">Bản chất:</span></div>
+        </div>
+        <ul>
+            <li><span class="bold">Tính giai cấp:</span> Là bộ máy để củng cố địa vị thống trị và bảo vệ lợi ích của giai cấp công nhân và nhân dân lao động, đảm bảo sự thống trị của đa số đối với thiểu số.</li>
+            <li><span class="bold">Tính xã hội:</span> Tồn tại trên cơ sở xã hội rộng rãi hơn so các kiểu nhà nước trước đó. Có quan điểm cho rằng Nhà nước XHCN là "nửa nhà nước" vì tính giai cấp ít đi và đối tượng hướng đến là đại đa số xã hội.</li>
+        </ul>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">Hình thức tại Việt Nam:</span></div>
+        </div>
+        <ul>
+            <li><span class="bold">Chính thể:</span> Cộng hòa xã hội chủ nghĩa.</li>
+            <li><span class="bold">Cấu trúc:</span> Nhà nước đơn nhất.</li>
+            <li><span class="bold">Chế độ chính trị:</span> Dân chủ, nhân dân là chủ thể của quyền lực nhà nước, tất cả quyền lực nhà nước thuộc về nhân dân.</li>
+        </ul>
+
+        <!-- VẬN DỤNG NHANH BÀI 10 -->
+        <div class="practice-box">
+            <div class="bold-blue" style="text-decoration: underline;">📝 Vận dụng nhanh Bài 10:</div>
+            
+            <div class="q-title">Nhà nước xã hội chủ nghĩa không còn là nhà nước nguyên nghĩa mà chỉ là nửa nhà nước.</div>
+            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 10]</span> Do mang tính giai cấp và xã hội, nó tự tiêu vong nên được gọi là nửa nhà nước.</div>
+
+            <div class="q-title">Nhà nước xã hội chủ nghĩa chỉ bảo vệ lợi ích của giai cấp công nhân và nhân dân lao động.</div>
+            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 10]</span> Là bộ máy củng cố địa vị và bảo vệ lợi ích của giai cấp này, đảm bảo thống trị của đa số với thiểu số.</div>
+        </div>
+
+        <div class="divider">---------------------------------------------------</div>
+
+        <!-- BÀI 11 -->
+        <h2>IV. BÀI 11: NHỮNG VẤN ĐỀ CƠ BẢN VỀ NN PHÁP QUYỀN</h2>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">Dấu hiệu cơ bản:</span></div>
+        </div>
+        <ul>
+            <li>Nhà nước quản lý bằng pháp luật.</li>
+            <li>Nhà nước phải bị hạn chế bằng pháp luật.</li>
+            <li>Nội dung và tính chất của pháp luật trong Nhà nước pháp quyền phải tiến bộ.</li>
+            <li>Tính tối cao của pháp luật cần phải được tôn trọng và bảo vệ.</li>
+        </ul>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">Tại Việt Nam:</span> Việc xây dựng Nhà nước pháp quyền là một biểu hiện và thành tựu của dân chủ, đồng thời là yêu cầu tất yếu của nền kinh tế thị trường và hội nhập.</div>
+        </div>
+
+        <div class="divider">---------------------------------------------------</div>
+
+        <!-- MINDMAPS -->
+        <h2>V. SƠ ĐỒ TƯ DUY TỔNG KẾT</h2>
+        
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold"><mark>Mindmap 1: Hình thức Nhà nước (Bài 8)</mark></span></div>
+        </div>
+        <div class="mindmap-container">
+<pre class="mermaid">
+mindmap
+  root((Hình thức<br/>Nhà nước))
+    Chính thể
+      Quân chủ
+        Tuyệt đối
+        Hạn chế
+      Cộng hòa
+    Cấu trúc
+      Đơn nhất
+      Liên bang
+    Chế độ chính trị
+      Dân chủ
+      Phản dân chủ
+</pre>
+        </div>
+
+        <div class="arrow-item" style="margin-top: 20px;">
+            <span class="arrow">➔</span>
+            <div><span class="bold"><mark>Mindmap 2: NN XHCN & NN Pháp Quyền</mark></span></div>
+        </div>
+        <div class="mindmap-container">
+<pre class="mermaid">
+mindmap
+  root((Nhà nước<br/>Việt Nam))
+    Hệ thống Chính trị
+      Là trung tâm
+      Thiết lập khung pháp lý
+    Bản chất XHCN
+      Tính giai cấp
+      Tính xã hội
+    Hình thức
+      CHXHCN
+      Đơn nhất
+      Dân chủ
+    NN Pháp quyền
+      Quản lý bằng PL
+      Hạn chế quyền lực
+      PL tiến bộ tối cao
+</pre>
+        </div>
+
+        <div class="divider">---------------------------------------------------</div>
+
+        <!-- PHẦN ÔN TẬP TỔNG HỢP -->
+        <h2>VI. PHẦN ÔN TẬP TỔNG HỢP (THỰC HÀNH NHẬN ĐỊNH)</h2>
+        
+        <h3>📝 PHẦN B5: HÌNH THỨC NHÀ NƯỚC (32 CÂU)</h3>
+        
+        <div class="q-title">Câu 1: Trong hình thức chính thể quân chủ, người đứng đầu nhà nước nắm giữ cả ba quyền lực: quyền lập pháp, quyền hành pháp, quyền tư pháp.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Tùy thuộc vào khả năng nắm giữ quyền lực mà chia làm 2 loại. Quân chủ tuyệt đối thì người đứng đầu mới nắm giữ cả 3 quyền. Còn quân chủ hạn chế thì bên cạnh nhà vua còn có các thiết chế khác san sẻ quyền lực.</div>
+
+        <div class="q-title">Câu 2: Mọi Chính phủ phải do Quốc hội hay Nghị viện thành lập.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Tùy theo hình thức tổ chức quyền lực nhà nước. Nếu theo chế độ cộng hòa tổng thống thì chính phủ do tổng thống thành lập. Còn cộng hòa đại nghị thì chính phủ mới được thành lập trên cơ sở nghị viện.</div>
+
+        <div class="q-title">Câu 3: Mối quan hệ giữa Chính phủ và Nghị viện hay Quốc hội là kiểm chế đối trọng trong chế độ đại nghị.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Chính phủ chịu trách nhiệm trước nghị viện, nếu không được tín nhiệm thì chính phủ phải từ chức. Tuy nhiên, để hạn chế quyền của nghị viện, chính phủ cũng có quyền đề nghị nhà vua giải tán nghị viện để giải quyết xung đột.</div>
+
+        <div class="q-title">Câu 4: Chính phủ luôn luôn chịu trách nhiệm trước Quốc hội hay Nghị viện.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Tùy theo cách thức tổ chức quyền lực nhà nước. Chế độ cộng hòa tổng thống thì chính phủ chịu trách nhiệm trước tổng thống. Cộng hòa đại nghị và cộng hòa hỗn hợp thì chính phủ mới chịu trách nhiệm trước nghị viện.</div>
+
+        <div class="q-title">Câu 5: Trong cấu trúc nhà nước đơn nhất không thể tồn tại khu tự trị.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Nhà nước đơn nhất chỉ có 1 chủ quyền quốc gia duy nhất và 1 hệ thống cơ quan nhà nước thống nhất từ trung ương xuống địa phương, cho nên không tồn tại khu tự trị.</div>
+
+        <div class="q-title">Câu 6: Trong hình thức chính thể quân chủ không thể tồn tại dân chủ.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Ở hình thức quân chủ hạn chế (quân chủ lập hiến) như quân chủ nhị nguyên hay đại nghị, quyền lực nhà vua bị hạn chế và bên cạnh nhà vua còn có nghị viện do dân bầu ra. Cho nên hình thức này vẫn tồn tại dân chủ.</div>
+
+        <div class="q-title">Câu 7: Tổng thống luôn do nhân dân trực tiếp bầu ra.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Theo chế độ cộng hòa đại nghị thì tổng thống không do dân trực tiếp bầu ra mà được thành lập dựa trên cơ sở nghị viện do thượng viện, hạ viện, các đại biểu hội đồng các vùng bầu ra.</div>
+
+        <div class="q-title">Câu 8: Đặc trưng của chế độ đại nghị là nghị viện thành lập và giải tán chính phủ.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Chính phủ được thành lập trên cơ sở nghị viện, nếu nghị viện không tín nhiệm thì có quyền thông qua thủ tục bỏ phiếu tín nhiệm để giải tán chính phủ.</div>
+
+        <div class="q-title">Câu 9: Đặc trưng của chế độ cộng hòa tổng thống là quyền lực không bị hạn chế của tổng thống.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Chế độ cộng hòa tổng thống áp dụng triệt để nguyên tắc phân chia quyền lực và cơ chế kiềm chế đối trọng. Tổng thống (hành pháp) vẫn chịu sự chi phối của nghị viện (lập pháp) và tòa án tối cao (tư pháp).</div>
+
+        <div class="q-title">Câu 10: Chế độ chính trị của Nhà nước luôn phụ thuộc vào hình thức chính thể của Nhà nước.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Ba yếu tố (hình thức chính thể, hình thức cấu trúc, chế độ chính trị) có mối quan hệ tác động qua lại lẫn nhau tạo thành hình thức nhà nước. Hình thức chính thể và chế độ chính trị có mối quan hệ chặt chẽ chứ không phải luôn phụ thuộc một chiều.</div>
+
+        <div class="q-title">Câu 11: Chế độ chính trị là phương pháp thực hiện quyền lực nhà nước.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Theo khái niệm, chế độ chính trị là tổng thể các phương pháp, thủ đoạn mà các cơ quan nhà nước sử dụng để thực hiện quyền lực nhà nước.</div>
+
+        <div class="q-title">Câu 12: Nguyên thủ quốc gia là một bộ phận có trong tất cả các nhà nước.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Dù là Vua (quân chủ), Tổng thống (cộng hòa) hay Chủ tịch nước (XHCN), họ đều là người đứng đầu thay mặt nhà nước đối nội, đối ngoại.</div>
+
+        <div class="q-title">Câu 13: Quyền lực của các cơ quan nhà nước không thể cao hơn Hiến pháp.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8 & Bài 11]</span> Để tránh lạm quyền, Hiến pháp là đạo luật cao nhất và là căn cứ căn bản để kiểm soát quyền lực nhà nước.</div>
+
+        <div class="q-title">Câu 14: Nguồn gốc quyền lực nhà nước của các nhà nước đều xuất phát từ nhân dân.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Đối với nhà nước chủ nô, phong kiến, quyền lực vẫn theo tư tưởng thần quyền, xuất phát từ lực lượng siêu nhiên chứ không phải từ nhân dân.</div>
+
+        <div class="q-title">Câu 15: Tổng thống luôn do nhân dân trực tiếp bầu ra.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Ở chế độ cộng hòa đại nghị, tổng thống không do dân trực tiếp bầu mà được bầu dựa trên cơ sở nghị viện (thượng viện, hạ viện, hội đồng vùng).</div>
+
+        <div class="q-title">Câu 16: Nhân dân đều được tham gia vào bộ máy nhà nước và bằng bầu cử.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Điều này chỉ đúng với cộng hòa hoặc quân chủ hạn chế. Với quân chủ tuyệt đối, nhân dân không được tham gia bằng bầu cử.</div>
+
+        <div class="q-title">Câu 17: Mối quan hệ giữa Chính phủ và Nghị viện hay Quốc hội là kiềm chế đối trọng trong chế độ Cộng hòa tổng thống.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Chế độ này áp dụng triệt để nguyên tắc phân quyền, các nhánh quyền lực vừa độc lập vừa chịu sự chi phối lẫn nhau.</div>
+
+        <div class="q-title">Câu 18: Một nhà nước dân chủ thì không thể mang hình thức chính thể quân chủ.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Hình thức quân chủ hạn chế (lập hiến) vẫn có nghị viện do dân bầu ra, quyền lực nhà vua bị hạn chế, do đó vẫn tồn tại dân chủ.</div>
+
+        <div class="q-title">Câu 19: Sự tham gia trực tiếp của nhân dân vào bộ máy nhà nước là căn cứ duy nhất để đánh giá tính chất dân chủ của nhà nước.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Đây là việc phát huy quyền làm chủ, thể hiện nhà nước của dân, do dân, vì dân.</div>
+
+        <div class="q-title">Câu 20: Đặc trưng của chế độ đại nghị là nghị viện thành lập và giải tán chính phủ.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Nếu nghị viện không tín nhiệm chính phủ nữa thì có quyền bỏ phiếu tín nhiệm để giải tán.</div>
+
+        <div class="q-title">Câu 21: Sự phân quyền và cơ chế kiểm tra đối trọng giữa các cơ quan nhà nước là biểu hiện quyền lực nhà nước thuộc về nhân dân.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Cơ chế này sinh ra để ngăn ngừa lạm quyền, tạo sự cân bằng và chế ước lẫn nhau giữa các cơ quan, bảo vệ tự do của công dân.</div>
+
+        <div class="q-title">Câu 22: Đặc trưng của chế độ cộng hòa tổng thống là quyền lực không bị hạn chế của tổng thống.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Quyền lực của tổng thống vẫn bị hạn chế do bị chi phối bởi thiết chế kiềm chế đối trọng từ nghị viện và tòa án tối cao.</div>
+
+        <div class="q-title">Câu 23: Hình thức chính thể cộng hòa dân chủ chỉ được hình thành từ sau cách mạng tư sản.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Nó đã xuất hiện từ nhà nước chủ nô (cộng hòa dân chủ chủ nô Aten thế kỷ V-IV TCN).</div>
+
+        <div class="q-title">Câu 24: Mối quan hệ kiểm tra, giám sát giữa các cơ quan nhà nước chỉ tồn tại trong những nước áp dụng nguyên tắc phân quyền.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Cả những nước áp dụng nguyên tắc tập quyền cũng có sự giám sát (thông qua cơ quan nắm quyền lực cao nhất).</div>
+
+        <div class="q-title">Câu 25: Chủ quyền quốc gia luôn tập trung ở chính quyền trung ương cho dù đó là Nhà nước liên bang hay đơn nhất.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Chủ quyền quốc gia thể hiện nội dung chính trị pháp lý đối nội, đối ngoại, chỉ có 1 chủ thể duy nhất có thẩm quyền này.</div>
+
+        <div class="q-title">Câu 26: Một nhà nước với chế độ chính trị dân chủ phải là nhà nước có hình thức cấu trúc liên bang.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Chế độ dân chủ vẫn tồn tại ở cấu trúc nhà nước đơn nhất.</div>
+
+        <div class="q-title">Câu 27: Nhà nước với chính thể cộng hòa thì luôn có chế độ chính trị dân chủ.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Cơ quan quyền lực cao nhất được bầu ra, mọi tầng lớp nhân dân có quyền tham gia bầu cử (trực tiếp hoặc gián tiếp).</div>
+
+        <div class="q-title">Câu 28: Chế độ chính trị của Nhà nước luôn phụ thuộc vào hình thức chính thể của Nhà nước.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Ba yếu tố (chính thể, cấu trúc, chế độ chính trị) có mối quan hệ tác động qua lại lẫn nhau, trong đó chính thể và chế độ chính trị có quan hệ chặt chẽ (chứ không phải luôn phụ thuộc một chiều).</div>
+
+        <div class="q-title">Câu 29: Hình thức chính thể quân chủ là hình thức chính thể mà ở đó toàn bộ quyền lực tối cao thuộc về một người.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Vẫn có quân chủ hạn chế, trong đó quyền lực của nhà vua bị san sẻ với các cơ quan khác.</div>
+
+        <div class="q-title">Câu 30: Hình thức chính thể cộng hòa không tồn tại ở các kiểu Nhà nước chủ nô và phong kiến.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Tồn tại ở Aten, La Mã (chủ nô) và Nappholo, Nopgorot (phong kiến).</div>
+
+        <div class="q-title">Câu 31: Hình thức nhà nước là những hoạt động của Nhà nước.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Là cách thức tổ chức quyền lực và phương pháp thực hiện quyền lực.</div>
+
+        <div class="q-title">Câu 32: Không thể có chế độ chính trị dân chủ trong một nhà nước chính thể quân chủ tuyệt đối.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 8]</span> Vì quân chủ tuyệt đối là người đứng đầu có quyền lực vô hạn, độc đoán, chuyên chế (phản dân chủ).</div>
+
+        <h3>📝 PHẦN B6: KIỂU NHÀ NƯỚC (9 CÂU)</h3>
+        
+        <div class="q-title">Câu 1: Cơ sở để xác định các kiểu nhà nước là cơ sở kinh tế, cơ sở xã hội và cơ sở tư tưởng.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 5]</span> Đây là 3 yếu tố tiền đề, đặc trưng để phân biệt các kiểu nhà nước.</div>
+
+        <div class="q-title">Câu 2: Sự thay thế các kiểu nhà nước trong lịch sử theo quan điểm Mác xít là quy luật khách quan.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 5]</span> Quá trình này phụ thuộc vào quy luật thay thế các hình thái kinh tế-xã hội, không phụ thuộc ý chí chủ quan.</div>
+
+        <div class="q-title">Câu 3: Sự khác biệt lớn nhất giữa nhà nước chiếm hữu nô lệ, nhà nước phong kiến, nhà nước tư sản với nhà nước xã hội chủ nghĩa là sự khác biệt về cơ sở kinh tế.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 5]</span> Sự khác biệt nằm ở cả 3 yếu tố: cơ sở kinh tế, cơ sở xã hội và cơ sở tư tưởng.</div>
+
+        <div class="q-title">Câu 4: Các nhà nước đều phải trải qua tất cả các kiểu nhà nước trong lịch sử.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 5]</span> Không bắt buộc phải trải qua đầy đủ theo trật tự (Ví dụ: từ tư sản có thể lên XHCN luôn chứ không cần quay lại từ đầu).</div>
+
+        <div class="q-title">Câu 5: Cơ sở tư tưởng trong nhà nước chiếm hữu nô lệ là đa thần giáo.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 5]</span> Đây là câu hay "bẫy" từ vựng, tài liệu ghi chính xác cơ sở tư tưởng thời kỳ này là "đa thần đạo".</div>
+
+        <div class="q-title">Câu 6: Kiểu nhà nước sau tiến bộ hơn kiểu nhà nước trước.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 5]</span> Dựa trên phương thức sản xuất, cơ sở xã hội tiến bộ hơn, khoa học kỹ thuật và tự do dân chủ hơn.</div>
+
+        <div class="q-title">Câu 7: Phân tích cơ sở hình thành và phát triển của nhà nước tư sản.</div>
+        <div><span class="q-ans-true">CÂU HỎI TỰ LUẬN.</span> Hướng dẫn: <span class="bold-blue">[Theo kiến thức Bài 5]</span> Đây là câu tự luận ngắn, tập trung vào khủng hoảng phong kiến, sự phát triển kỹ thuật, bóc lột sức lao động làm thuê và phong trào phục hưng dẫn đến cách mạng tư sản.</div>
+
+        <div class="q-title">Câu 8: Trong nhà nước xã hội chủ nghĩa, cơ sở kinh tế là công hữu nhưng nhà nước vẫn còn tồn tại.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 5 & Bài 10]</span> XHCN là sự vận động phát triển chứ không xóa bỏ hoàn toàn xã hội cũ, nên vẫn còn dấu ấn và nhà nước vẫn tồn tại.</div>
+
+        <div class="q-title">Câu 9: Sự bóc lột trong quan hệ chiếm hữu nô lệ mang tính chất dã man nhất trong các kiểu nhà nước.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 5]</span> Vì xem con người là vật sở hữu và bóc lột trực tiếp thẳng vào người nô lệ.</div>
+
+        <h3>📝 PHẦN B7: NHÀ NƯỚC XÃ HỘI CHỦ NGHĨA (8 CÂU)</h3>
+
+        <div class="q-title">Câu 1: Nhà nước xã hội chủ nghĩa không còn là nhà nước nguyên nghĩa mà chỉ là nửa nhà nước.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 10]</span> Do mang tính giai cấp và xã hội, nó tự tiêu vong nên được gọi là nửa nhà nước.</div>
+
+        <div class="q-title">Câu 2: Bản chất của nhà nước xã hội chủ nghĩa do cơ sở kinh tế - xã hội của nhà nước quy định.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 10]</span> Bị quy định bởi cơ sở kinh tế và "chế độ chính trị - xã hội".</div>
+
+        <div class="q-title">Câu 3: Chức năng duy nhất của nhà nước xã hội chủ nghĩa là quản lý kinh tế - xã hội.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 10]</span> Nó còn có các chức năng đối ngoại. Quản lý kinh tế - xã hội chỉ là một phần trong chức năng đối nội.</div>
+
+        <div class="q-title">Câu 4: Nhà nước xã hội chủ nghĩa chỉ bảo vệ lợi ích của giai cấp công nhân và nhân dân lao động.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 10]</span> Là bộ máy củng cố địa vị và bảo vệ lợi ích của giai cấp này, đảm bảo thống trị của đa số với thiểu số.</div>
+
+        <div class="q-title">Câu 5: Việc thực hiện quyền lực trong nhà nước xã hội chủ nghĩa không mang tính cưỡng chế.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 10]</span> Vẫn mang tính cưỡng chế để đấu tranh chống vi phạm pháp luật, bảo vệ trật tự an toàn xã hội.</div>
+
+        <div class="q-title">Câu 6: Tính nửa nhà nước của nhà nước xã hội chủ nghĩa thể hiện qua chức năng, các nguyên tắc tổ chức và hoạt động của bộ máy nhà nước.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 10]</span> Tính nửa nhà nước thể hiện qua "bản chất" (gồm tính giai cấp và tính xã hội, phục vụ đại đa số nên tính giai cấp ít đi).</div>
+
+        <div class="q-title">Câu 7: Quốc hội là cơ quan duy nhất mang tính quyền lực trong bộ máy nhà nước xã hội chủ nghĩa.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 10]</span> Tổ chức theo nguyên tắc tập quyền XHCN, quyền lực tập trung thống nhất vào tay cơ quan đại diện do dân bầu ra.</div>
+
+        <div class="q-title">Câu 8: Chế độ chính trị dân chủ chỉ tồn tại trong nhà nước xã hội chủ nghĩa.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 10 & Bài 8]</span> Còn tồn tại trong cộng hòa tổng thống, đại nghị, hỗn hợp và quân chủ đại nghị.</div>
+
+    </div>
+</div>
+
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ 
+        startOnLoad: true, 
+        theme: 'base',
+        themeVariables: {
+            fontFamily: '"Patrick Hand", cursive', 
+            primaryColor: '#ffffff',
+            primaryTextColor: '#1a56db', 
+            primaryBorderColor: '#1a56db',
+            lineColor: '#d32f2f', 
+            secondaryColor: '#ffeba1', 
+            tertiaryColor: '#e4eaf5'
+        }
+    });
+</script>
+
+</body>
+</html>
