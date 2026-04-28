@@ -9,7 +9,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
     <style>
         :root {
+            /* Các biến mặc định cho Desktop */
             --grid-size: 32px;
+            --page-padding-left: 75px;
+            --page-padding-right: 30px;
+            --margin-line-pos: 65px;
+            --base-font-size: 20px;
+            --h1-size: 26px;
+            --h2-size: 22px;
+            
+            /* Màu sắc */
             --blue-pen: #1a56db;
             --red-pen: #d32f2f;
             --green-pen: #2e7d32;
@@ -19,14 +28,31 @@
             --dashed-line: #9bc1ff;
         }
 
+        /* Tối ưu riêng cho màn hình điện thoại (dưới 768px) */
+        @media (max-width: 768px) {
+            :root {
+                --grid-size: 28px;
+                --page-padding-left: 40px;
+                --page-padding-right: 15px;
+                --margin-line-pos: 30px;
+                --base-font-size: 18px;
+                --h1-size: 22px;
+                --h2-size: 20px;
+            }
+        }
+
         body {
             margin: 0;
-            padding: 20px;
-            background-color: #d1d5db; /* Màu nền ngoài trang giấy */
+            padding: 10px;
+            background-color: #d1d5db; 
             font-family: 'Patrick Hand', cursive, sans-serif;
-            font-size: 20px;
+            font-size: var(--base-font-size);
             color: var(--blue-pen);
-            line-height: var(--grid-size); /* Trùng với kích thước ô ly để chữ nằm trên dòng */
+            line-height: var(--grid-size); 
+        }
+
+        @media (min-width: 769px) {
+            body { padding: 20px; }
         }
 
         /* Khung trang giấy */
@@ -35,17 +61,17 @@
             max-width: 900px;
             margin: 0 auto;
             position: relative;
-            padding: calc(var(--grid-size) * 1) 30px calc(var(--grid-size) * 2) 75px;
+            padding: calc(var(--grid-size) * 1) var(--page-padding-right) calc(var(--grid-size) * 2) var(--page-padding-left);
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             border-radius: 4px;
-            overflow: hidden;
+            overflow-x: hidden;
             
             /* Tạo lưới ô ly vuông */
             background-image:
                 linear-gradient(var(--grid-line) 1px, transparent 1px),
                 linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
             background-size: var(--grid-size) var(--grid-size);
-            background-position: 0 10px; /* Căn chỉnh chữ khớp đường kẻ */
+            background-position: 0 10px; 
         }
 
         /* Đường kẻ lề màu đỏ */
@@ -54,7 +80,7 @@
             position: absolute;
             top: 0;
             bottom: 0;
-            left: 65px;
+            left: var(--margin-line-pos);
             width: 1px;
             background-color: var(--margin-line);
             z-index: 1;
@@ -74,18 +100,26 @@
             z-index: 10;
         }
 
-        /* Lớp chứa nội dung để nổi lên trên các đường kẻ */
+        @media (max-width: 768px) {
+            .tape {
+                width: 60px;
+                right: 20px;
+                top: 10px;
+                height: 20px;
+            }
+        }
+
+        /* Lớp chứa nội dung */
         .content {
             position: relative;
             z-index: 2;
         }
 
-        /* Các thành phần văn bản */
         .date {
             text-align: right;
             color: #8899a6;
             font-style: italic;
-            font-size: 18px;
+            font-size: calc(var(--base-font-size) - 2px);
             margin-bottom: calc(var(--grid-size) * 1);
         }
 
@@ -94,12 +128,13 @@
             color: var(--red-pen);
             text-transform: uppercase;
             font-weight: normal;
-            font-size: 26px;
+            font-size: var(--h1-size);
             letter-spacing: 1px;
             margin: 0 0 calc(var(--grid-size) * 1) 0;
             text-decoration: underline;
             text-decoration-style: dashed;
             text-underline-offset: 4px;
+            line-height: calc(var(--grid-size) * 1.5);
         }
 
         h2 {
@@ -107,7 +142,7 @@
             font-style: italic;
             text-transform: uppercase;
             font-weight: normal;
-            font-size: 22px;
+            font-size: var(--h2-size);
             margin: calc(var(--grid-size) * 1) 0 0 0;
             display: inline-block;
             border-bottom: 2px solid var(--green-pen);
@@ -115,7 +150,7 @@
         }
 
         p, div {
-            margin: 0; /* Reset margin để giữ nhịp dòng ô ly */
+            margin: 0;
         }
 
         .arrow-item {
@@ -128,7 +163,7 @@
             color: var(--red-pen);
             font-weight: bold;
             margin-right: 8px;
-            font-size: 22px;
+            font-size: var(--h2-size);
         }
 
         mark {
@@ -136,18 +171,12 @@
             color: var(--blue-pen);
             font-family: inherit;
             padding: 0 4px;
+            border-radius: 3px;
         }
 
-        .bold {
-            font-weight: bold;
-        }
+        .bold { font-weight: bold; }
+        .bold-blue { font-weight: bold; color: var(--blue-pen); }
 
-        .bold-blue {
-            font-weight: bold;
-            color: var(--blue-pen);
-        }
-
-        /* Style cho danh sách gạch đầu dòng có đường gạch đứt dọc giống ảnh */
         ul {
             list-style-type: none;
             padding-left: 20px;
@@ -155,10 +184,14 @@
             border-left: 2px dashed var(--dashed-line);
         }
 
-        li {
-            position: relative;
+        @media (max-width: 768px) {
+            ul {
+                padding-left: 15px; 
+                margin-left: 5px;
+            }
         }
 
+        li { position: relative; }
         li::before {
             content: '- ';
             position: absolute;
@@ -171,20 +204,21 @@
             letter-spacing: 3px;
             margin: calc(var(--grid-size) * 0.5) 0;
             font-family: monospace;
+            overflow: hidden;
+            white-space: nowrap;
         }
 
-        /* Thêm style cho phần mindmap */
         .mindmap-container {
             margin-top: 20px;
             padding: 10px;
-            background-color: rgba(255, 235, 161, 0.15); /* Nền vàng nhạt giống highlight */
+            background-color: rgba(255, 235, 161, 0.15); 
             border: 2px dashed var(--dashed-line);
             border-radius: 10px;
             text-align: center;
-            overflow-x: auto;
+            overflow-x: auto; 
+            -webkit-overflow-scrolling: touch; 
         }
 
-        /* Thêm style cho phần bài tập vận dụng và ôn tập */
         .practice-box {
             background-color: rgba(26, 86, 219, 0.05);
             border-left: 4px solid var(--blue-pen);
@@ -192,19 +226,25 @@
             margin: 15px 0;
             border-radius: 0 8px 8px 0;
         }
+
         .q-title {
             font-weight: bold;
             color: var(--blue-pen);
             margin-top: 10px;
+            line-height: var(--grid-size);
         }
         .q-ans-true { color: var(--green-pen); font-weight: bold; }
         .q-ans-false { color: var(--red-pen); font-weight: bold; }
+        
         h3 {
             color: var(--red-pen);
             font-family: 'Patrick Hand', cursive;
-            font-size: 24px;
+            font-size: var(--h2-size);
             text-decoration: underline;
             text-decoration-style: dashed;
+            margin-top: var(--grid-size);
+            margin-bottom: 0;
+            line-height: calc(var(--grid-size) * 1.5);
         }
     </style>
 </head>
@@ -234,12 +274,9 @@
         <div><span class="bold-blue">Các lưu ý quan trọng:</span> Khi học, cần sử dụng các kết luận triết học Mác – Lênin, vận dụng chủ trương, chính sách của Đảng và Nhà nước, cũng như liên hệ kiến thức đã học với thực tiễn để lý giải các vấn đề pháp lý.</div>
 
         <div class="practice-box">
-            <div class="bold-blue" style="text-decoration: underline;">✍️ Vận dụng nhanh (Trích Phần Ôn tập):</div>
-            <div class="q-title">Câu 1: Pháp luật chỉ có thể được hình thành bằng con đường ban hành của Nhà nước.</div>
-            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Nhà nước có thể hình thành pháp luật bằng 2 con đường: Ban hành mới, hoặc Thừa nhận các quy tắc xử sự đã tồn tại sẵn (Tập quán pháp, Tiền lệ pháp).</div>
-            <div class="q-title">Câu 4: Pháp luật ra đời cùng lúc với sự xuất hiện của xã hội loài người.</div>
-            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Trong xã hội nguyên thủy chưa có pháp luật. Pháp luật chỉ ra đời khi xã hội phân chia giai cấp và có nhà nước.</div>
-            <div style="font-style: italic; color: #8899a6; margin-top: 10px; font-size: 16px;">(Xem toàn bộ câu hỏi ở Phần VII cuối sổ tay)</div>
+            <div class="bold-blue" style="text-decoration: underline;">✍️ Vận dụng nhanh Bài 1:</div>
+            <div class="q-title">Câu 1: Môn Lý luận về nhà nước và pháp luật lấy Chủ nghĩa duy vật biện chứng làm phương pháp nghiên cứu duy nhất.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 1]</span> Ngoài cơ sở phương pháp luận cốt lõi là Chủ nghĩa duy vật biện chứng, chủ nghĩa duy vật lịch sử và phép biện chứng duy vật, môn học còn sử dụng các phương pháp nghiên cứu cụ thể khác phù hợp với đối tượng là các hiện tượng xã hội.</div>
         </div>
 
         <div class="divider">---------------------------------------------------</div>
@@ -266,6 +303,15 @@
         </ul>
         
         <div><span class="bold-blue">Ví dụ minh họa:</span> Đặc trưng quyền lực công cộng đặc biệt được thể hiện rõ qua việc nhà nước có lực lượng vũ trang thường trực, cảnh sát, nhà tù để quản lý và cưỡng chế, điều mà tổ chức thị tộc nguyên thủy không có.</div>
+
+        <div class="practice-box">
+            <div class="bold-blue" style="text-decoration: underline;">✍️ Vận dụng nhanh Bài 2:</div>
+            <div class="q-title">Câu 6: Mọi tổ chức chính trị - xã hội đều có quyền lực công cộng đặc biệt.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 2]</span> Quyền lực công cộng đặc biệt là đặc trưng riêng của nhà nước, thể hiện qua sự độc quyền sử dụng vũ lực và có lực lượng vũ trang thường trực, cảnh sát, nhà tù để cưỡng chế.</div>
+            
+            <div class="q-title">Câu 7: Chỉ có nhà nước mới có thẩm quyền phân chia lãnh thổ và quản lý cư dân theo các đơn vị hành chính.</div>
+            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 2]</span> Nhà nước lấy sự phân chia lãnh thổ làm cơ sở quản lý cư dân sống trên đó. Không một tổ chức nào khác ngoài nhà nước có thẩm quyền này.</div>
+        </div>
 
         <div class="divider">---------------------------------------------------</div>
 
@@ -298,6 +344,15 @@
             <li>Ở phương Đông, nhà nước ra đời tương đối sớm chủ yếu do nhu cầu trị thủy và chống ngoại xâm (bảo vệ lãnh thổ, mùa màng), chứ không hoàn toàn do mâu thuẫn giai cấp chín muồi như phương Tây.</li>
         </ul>
 
+        <div class="practice-box">
+            <div class="bold-blue" style="text-decoration: underline;">✍️ Vận dụng nhanh Bài 3:</div>
+            <div class="q-title">Câu 2: Theo quan điểm Mác - Lênin, 3 lần phân công lao động xã hội là nguyên nhân trực tiếp dẫn đến sự ra đời của nhà nước.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 3]</span> Ba lần phân công lao động chỉ làm xuất hiện tư hữu và làm tiền đề mâu thuẫn. Nguyên nhân trực tiếp làm xuất hiện nhà nước là do mâu thuẫn giai cấp trở nên gay gắt đến mức không thể điều hòa được.</div>
+            
+            <div class="q-title">Câu 4: Theo thuyết khế ước xã hội, chủ quyền nhà nước thuộc về nhân dân.</div>
+            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 3]</span> Thuyết này cho rằng nhà nước là sản phẩm của khế ước ký kết giữa những con người tự nhiên. Nếu nhà nước vi phạm quyền tự nhiên, khế ước mất hiệu lực và nhân dân có quyền lật đổ.</div>
+        </div>
+
         <div class="divider">---------------------------------------------------</div>
 
         <!-- BÀI 4 -->
@@ -324,12 +379,11 @@
         </ul>
 
         <div class="practice-box">
-            <div class="bold-blue" style="text-decoration: underline;">✍️ Vận dụng nhanh (Trích Phần Ôn tập):</div>
-            <div class="q-title">Câu 1: Bản chất giai cấp của nhà nước thực chất chỉ là một giai cấp nhất định nắm quyền lực nhà nước.</div>
-            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Bản chất nhà nước luôn bao gồm hai mặt thống nhất với nhau: Tính giai cấp (bảo vệ lợi ích giai cấp thống trị) và Tính xã hội (giải quyết các công việc chung). Không thể chỉ nhìn nhận nhà nước ở khía cạnh giai cấp nắm quyền.</div>
-            <div class="q-title">Câu 2: Nhà nước bảo vệ giai cấp thống trị nhưng trong chừng mực nhất định nó đồng thời bảo vệ lợi ích của xã hội nói chung.</div>
-            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Đây là biểu hiện của "tính xã hội" của nhà nước. Giai cấp thống trị chỉ có thể giữ vững quyền lực nếu đảm bảo được trật tự xã hội an toàn có lợi cho cộng đồng.</div>
-            <div style="font-style: italic; color: #8899a6; margin-top: 10px; font-size: 16px;">(Xem toàn bộ câu hỏi ở Phần VII cuối sổ tay)</div>
+            <div class="bold-blue" style="text-decoration: underline;">✍️ Vận dụng nhanh Bài 4:</div>
+            <div class="q-title">Câu 11 (Phần A): Tính giai cấp và tính xã hội của nhà nước luôn tỷ lệ nghịch với nhau.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 4]</span> Hai tính chất này có mối quan hệ tương tác, vừa thống nhất vừa mâu thuẫn với nhau. Chúng luôn tồn tại song hành chứ không hoàn toàn tỷ lệ nghịch.</div>
+            <div class="q-title">Câu 2 (Phần B): Bản chất giai cấp của nhà nước thực chất chỉ là bảo vệ lợi ích cho giai cấp cầm quyền.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 4]</span> Bản chất giai cấp không chỉ là bảo vệ lợi ích, mà trước hết là vì lợi ích của chính giai cấp thống trị, đồng thời là công cụ để duy trì sự thống trị và trấn áp các giai cấp đối kháng.</div>
         </div>
 
         <div class="divider">---------------------------------------------------</div>
@@ -383,6 +437,14 @@
             <li>Tuy nhiên, không phải mọi quốc gia đều bắt buộc phải trải qua đầy đủ cả 4 kiểu nhà nước theo đúng tuần tự lịch sử.</li>
             <li>Hình thái kinh tế - xã hội nguyên thủy không có nhà nước.</li>
         </ul>
+
+        <div class="practice-box">
+            <div class="bold-blue" style="text-decoration: underline;">✍️ Vận dụng nhanh Bài 5:</div>
+            <div class="q-title">Câu 10: Hình thái kinh tế - xã hội cộng sản nguyên thủy đã tồn tại một kiểu nhà nước sơ khai.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 5]</span> Hình thái kinh tế - xã hội nguyên thủy không có nhà nước. Nhà nước chỉ ra đời khi chế độ cộng sản nguyên thủy tan rã và xã hội phân chia thành các giai cấp đối kháng.</div>
+            <div class="q-title">Câu 16: Sự thay thế các kiểu nhà nước diễn ra theo một quy luật khách quan, kiểu sau luôn tiến bộ hơn kiểu trước.</div>
+            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 5]</span> Kiểu nhà nước sau ra đời dựa trên sự phát triển mạnh mẽ hơn của lực lượng sản xuất, đòi hỏi một thể chế mới tiến bộ hơn về khoa học kỹ thuật và dân chủ.</div>
+        </div>
 
         <div class="divider">---------------------------------------------------</div>
 
@@ -442,84 +504,84 @@ mindmap
         <!-- PHẦN ÔN TẬP TỔNG HỢP -->
         <h2>VII. Phần Ôn Tập Tổng Hợp</h2>
         
-        <h3>PHẦN A: KHÁI QUÁT CHUNG VỀ NHÀ NƯỚC VÀ PHÁP LUẬT (CÂU 1 - 20)</h3>
+        <h3>PHẦN A: KHÁI QUÁT CHUNG & KIỂU NHÀ NƯỚC (CÂU 1 - 20)</h3>
         
-        <div class="q-title">Câu 1: Pháp luật chỉ có thể được hình thành bằng con đường ban hành của Nhà nước.</div>
-        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Nhà nước có thể hình thành pháp luật bằng hai con đường: (1) Ban hành các văn bản quy phạm pháp luật mới; (2) Thừa nhận các quy tắc xử sự đã tồn tại sẵn trong xã hội (như tập quán, tín điều tôn giáo, án lệ) và nâng chúng lên thành pháp luật (Tập quán pháp, Tiền lệ pháp).</div>
+        <div class="q-title">Câu 1: Môn Lý luận về nhà nước và pháp luật lấy Chủ nghĩa duy vật biện chứng làm phương pháp nghiên cứu duy nhất.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 1]</span> Ngoài cơ sở phương pháp luận cốt lõi là Chủ nghĩa duy vật biện chứng, chủ nghĩa duy vật lịch sử và phép biện chứng duy vật, môn học còn sử dụng các phương pháp nghiên cứu cụ thể khác phù hợp với đối tượng là các hiện tượng xã hội.</div>
 
-        <div class="q-title">Câu 2: Nền chính trị của giai cấp cầm quyền quy định bản chất, nội dung của pháp luật.</div>
-        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Theo quan điểm Mác - Lênin, yếu tố quyết định bản chất và nội dung của pháp luật là cơ sở kinh tế (cơ sở hạ tầng), chứ không phải nền chính trị. Pháp luật thuộc về kiến trúc thượng tầng, do cơ sở hạ tầng quyết định.</div>
+        <div class="q-title">Câu 2: Theo quan điểm Mác - Lênin, 3 lần phân công lao động xã hội là nguyên nhân trực tiếp dẫn đến sự ra đời của nhà nước.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 3]</span> Ba lần phân công lao động chỉ làm xuất hiện tư hữu và làm tiền đề mâu thuẫn. Nguyên nhân trực tiếp làm xuất hiện nhà nước là do mâu thuẫn giai cấp trở nên gay gắt đến mức không thể điều hòa được.</div>
 
-        <div class="q-title">Câu 3: Quyền lực kinh tế đóng vai trò quan trọng nhất so với quyền lực chính trị và tư tưởng.</div>
-        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Quyền lực kinh tế là nền tảng. Giai cấp nào nắm giữ tư liệu sản xuất chủ yếu của xã hội thì sẽ nắm quyền lực kinh tế, từ đó thiết lập quyền lực chính trị (lập ra nhà nước) và quyền lực tư tưởng để bảo vệ quyền lực kinh tế của mình.</div>
+        <div class="q-title">Câu 3: Thuyết bạo lực cho rằng nhà nước là kết quả của sự phát triển gia đình và quyền gia trưởng.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 3]</span> Quan điểm này thuộc về Thuyết gia trưởng. Thuyết bạo lực cho rằng nhà nước xuất hiện trực tiếp từ các cuộc chiến tranh xâm lược, thị tộc chiến thắng lập ra nhà nước để nô dịch thị tộc bại trận.</div>
 
-        <div class="q-title">Câu 4: Pháp luật ra đời cùng lúc với sự xuất hiện của xã hội loài người.</div>
-        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Trong xã hội cộng sản nguyên thủy chưa có pháp luật, hành vi con người được điều chỉnh bởi đạo đức, tôn giáo, tập quán. Pháp luật chỉ ra đời khi xã hội phân chia giai cấp và có nhà nước.</div>
+        <div class="q-title">Câu 4: Theo thuyết khế ước xã hội, chủ quyền nhà nước thuộc về nhân dân.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 3]</span> Thuyết này cho rằng nhà nước là sản phẩm của khế ước ký kết giữa những con người tự nhiên. Nếu nhà nước vi phạm quyền tự nhiên, khế ước mất hiệu lực và nhân dân có quyền lật đổ.</div>
 
-        <div class="q-title">Câu 5: Mọi quy tắc xử sự trong xã hội có giai cấp đều là pháp luật.</div>
-        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Trong xã hội có giai cấp tồn tại nhiều loại quy phạm xã hội khác nhau như: quy phạm đạo đức, quy phạm tôn giáo, điều lệ của tổ chức chính trị - xã hội. Chỉ những quy tắc xử sự do nhà nước ban hành hoặc thừa nhận, được bảo đảm thực hiện bằng quyền lực nhà nước mới là pháp luật.</div>
+        <div class="q-title">Câu 5: Nhà nước phương Đông ra đời chủ yếu do mâu thuẫn giai cấp phát triển đến mức gay gắt không thể điều hòa.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 3]</span> Khác với phương Tây, nhà nước phương Đông ra đời tương đối sớm chủ yếu do nhu cầu trị thủy và chống ngoại xâm (bảo vệ lãnh thổ, mùa màng), chứ không hoàn toàn do mâu thuẫn giai cấp chín muồi.</div>
 
-        <div class="q-title">Câu 6: Tôn giáo và đạo đức có thể là nguồn của pháp luật.</div>
-        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Nếu các quy tắc đạo đức hoặc tín điều tôn giáo phù hợp với ý chí của giai cấp thống trị, nhà nước có thể thừa nhận chúng và biến chúng thành quy phạm pháp luật (ví dụ: các quy định về cấm loạn luân, nghĩa vụ cấp dưỡng...).</div>
+        <div class="q-title">Câu 6: Mọi tổ chức chính trị - xã hội đều có quyền lực công cộng đặc biệt.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 2]</span> Quyền lực công cộng đặc biệt là đặc trưng riêng của nhà nước, thể hiện qua sự độc quyền sử dụng vũ lực và có lực lượng vũ trang thường trực, cảnh sát, nhà tù để cưỡng chế.</div>
 
-        <div class="q-title">Câu 7: Pháp luật là tiêu chuẩn duy nhất để đánh giá hành vi của con người.</div>
-        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Pháp luật là tiêu chuẩn pháp lý, nhưng hành vi con người còn được đánh giá dựa trên các tiêu chuẩn khác như đạo đức, phong tục, tập quán, quy định của tổ chức.</div>
+        <div class="q-title">Câu 7: Chỉ có nhà nước mới có thẩm quyền phân chia lãnh thổ và quản lý cư dân theo các đơn vị hành chính.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 2]</span> Nhà nước lấy sự phân chia lãnh thổ làm cơ sở quản lý cư dân sống trên đó. Không một tổ chức nào khác ngoài nhà nước có thẩm quyền này.</div>
 
-        <div class="q-title">Câu 8: Chỉ có pháp luật mới mang tính quy phạm.</div>
-        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Đạo đức, tập quán, tôn giáo đều mang tính quy phạm (tức là đưa ra khuôn mẫu, chuẩn mực hành vi). Tuy nhiên, chỉ pháp luật mới có tính "quy phạm phổ biến" bắt buộc đối với tất cả mọi người.</div>
+        <div class="q-title">Câu 8: Việc thu các khoản thuế bắt buộc là đặc trưng chỉ xuất hiện ở kiểu nhà nước tư sản và xã hội chủ nghĩa.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 2]</span> Thuế là một trong 5 đặc trưng cơ bản của mọi nhà nước. Mọi kiểu nhà nước đều phải thu thuế để duy trì hoạt động của bộ máy và thực hiện các chức năng chung.</div>
 
-        <div class="q-title">Câu 9: Tính cưỡng chế là đặc trưng riêng có của pháp luật.</div>
-        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Mọi quy phạm xã hội đều có sự ép buộc nhất định (ví dụ dư luận xã hội với đạo đức), nhưng chỉ pháp luật mới được bảo đảm thực hiện bằng sức mạnh cưỡng chế của bộ máy Nhà nước (quân đội, cảnh sát, nhà tù...).</div>
+        <div class="q-title">Câu 9: Theo tiếp cận thể chế, nhà nước được xem là "người gác đêm" hoặc nhà cung cấp phúc lợi.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 2]</span> Cách nhìn nhận nhà nước là "người gác đêm" hay công cụ quản lý xã hội thuộc về Tiếp cận chức năng. Tiếp cận thể chế nhìn nhận nhà nước là một tổ chức có cấu trúc thứ bậc.</div>
 
-        <div class="q-title">Câu 10: Chức năng xã hội của pháp luật chỉ xuất hiện trong các nhà nước dân chủ.</div>
-        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Bất kỳ nhà nước nào, dù là chủ nô hay phong kiến, muốn tồn tại thì ngoài việc bảo vệ lợi ích giai cấp thống trị, pháp luật của nó cũng phải giải quyết các vấn đề chung của xã hội (bảo vệ môi trường, an ninh trật tự, chống trộm cắp...). Đây là chức năng xã hội tất yếu.</div>
+        <div class="q-title">Câu 10: Hình thái kinh tế - xã hội cộng sản nguyên thủy đã tồn tại một kiểu nhà nước sơ khai.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 5]</span> Hình thái kinh tế - xã hội nguyên thủy không có nhà nước. Nhà nước chỉ ra đời khi chế độ cộng sản nguyên thủy tan rã và xã hội phân chia thành các giai cấp đối kháng.</div>
 
-        <div class="q-title">Câu 11: Pháp luật mang tính giai cấp sâu sắc, do đó nó chỉ bảo vệ lợi ích của giai cấp cầm quyền.</div>
-        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Bên cạnh việc bảo vệ lợi ích cốt lõi của giai cấp cầm quyền, pháp luật cũng phải ghi nhận và bảo vệ lợi ích của các giai cấp, tầng lớp khác trong xã hội ở một chừng mực nhất định để duy trì sự ổn định.</div>
+        <div class="q-title">Câu 11: Tính giai cấp và tính xã hội của nhà nước luôn tỷ lệ nghịch với nhau.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 4]</span> Hai tính chất này có mối quan hệ tương tác, vừa thống nhất vừa mâu thuẫn với nhau. Chúng luôn tồn tại song hành chứ không hoàn toàn tỷ lệ nghịch (chẳng hạn bảo vệ trật tự chung vừa có lợi cho xã hội, vừa giữ vững quyền lực cho giai cấp thống trị).</div>
 
-        <div class="q-title">Câu 12: Hình thức pháp luật phổ biến nhất hiện nay ở Việt Nam là tiền lệ pháp.</div>
-        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Ở Việt Nam, hình thức pháp luật phổ biến và quan trọng nhất là Văn bản quy phạm pháp luật. Tiền lệ pháp (án lệ) mới được áp dụng và là nguồn bổ trợ.</div>
+        <div class="q-title">Câu 12: Chức năng xã hội của nhà nước là sự thể hiện rõ nhất của bản chất giai cấp.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 4]</span> Việc nhà nước giải quyết các công việc chung, bảo vệ lợi ích chung của cộng đồng là biểu hiện rõ nhất của bản chất xã hội, không phải bản chất giai cấp.</div>
 
-        <div class="q-title">Câu 13: Tập quán pháp là những thói quen được truyền từ đời này sang đời khác.</div>
-        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Thói quen truyền từ đời này sang đời khác chỉ là phong tục, tập quán. Nó chỉ trở thành "Tập quán pháp" khi được Nhà nước thừa nhận là có giá trị pháp lý bắt buộc.</div>
+        <div class="q-title">Câu 13: Mọi kiểu nhà nước đều có cơ sở kinh tế dựa trên chế độ tư hữu về tư liệu sản xuất.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 5]</span> Kiểu nhà nước Xã hội chủ nghĩa (XHCN) có cơ sở kinh tế dựa trên chế độ công hữu về tư liệu sản xuất, khác biệt hoàn toàn với 3 kiểu nhà nước trước đó.</div>
 
-        <div class="q-title">Câu 14: Tiền lệ pháp (án lệ) không được áp dụng ở Việt Nam.</div>
-        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Hiện nay, Hội đồng Thẩm phán Tòa án nhân dân Tối cao của Việt Nam đã chính thức ban hành và áp dụng hệ thống các án lệ trong quá trình xét xử để bù đắp các lỗ hổng luật thành văn.</div>
+        <div class="q-title">Câu 14: Kiểu nhà nước chủ nô có sự bóc lột mang tính chất dã man nhất.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 5]</span> Vì cơ sở kinh tế là sự tư hữu tuyệt đối của chủ nô đối với tư liệu sản xuất và sở hữu cả người nô lệ (coi con người là vật sở hữu).</div>
 
-        <div class="q-title">Câu 15: Ngôn ngữ pháp lý phải đảm bảo tính đa nghĩa để linh hoạt trong áp dụng.</div>
-        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Ngôn ngữ pháp lý phải đảm bảo tính đơn nghĩa, chính xác và rõ ràng để tránh tình trạng "hiểu sao cũng được" và tùy tiện trong quá trình áp dụng luật.</div>
+        <div class="q-title">Câu 15: Mâu thuẫn chủ yếu trong kiểu nhà nước phong kiến là mâu thuẫn giữa giai cấp tư sản và vô sản.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 5]</span> Mâu thuẫn giữa tư sản và vô sản là của kiểu nhà nước Tư sản. Trong nhà nước Phong kiến, mâu thuẫn chủ yếu là giữa địa chủ và nông dân.</div>
 
-        <div class="q-title">Câu 16: Sự ra đời của Nhà nước là nguyên nhân trực tiếp dẫn đến sự ra đời của pháp luật.</div>
-        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Nhà nước và pháp luật là hai hiện tượng ra đời song hành, cùng chung nguyên nhân (kinh tế và giai cấp). Giai cấp thống trị lập ra nhà nước, đồng thời phải sử dụng pháp luật như là công cụ sắc bén nhất để quản lý xã hội.</div>
+        <div class="q-title">Câu 16: Sự thay thế các kiểu nhà nước diễn ra theo một quy luật khách quan, kiểu sau luôn tiến bộ hơn kiểu trước.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 5]</span> Kiểu nhà nước sau ra đời dựa trên sự phát triển mạnh mẽ hơn của lực lượng sản xuất, đòi hỏi một thể chế mới tiến bộ hơn về khoa học kỹ thuật và dân chủ.</div>
 
-        <div class="q-title">Câu 17: Pháp luật có thể tác động trở lại đối với cơ sở kinh tế.</div>
-        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Dù do cơ sở kinh tế quyết định, nhưng pháp luật có tính độc lập tương đối. Nó có thể tác động tích cực (nếu phù hợp) để thúc đẩy kinh tế phát triển, hoặc tác động tiêu cực (kìm hãm) nếu lỗi thời.</div>
+        <div class="q-title">Câu 17: Mọi quốc gia trên thế giới đều bắt buộc phải trải qua tuần tự đầy đủ 4 kiểu nhà nước.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 5]</span> Dù sự phát triển của các kiểu nhà nước là quy luật khách quan, nhưng do điều kiện lịch sử cụ thể, không phải quốc gia nào cũng bắt buộc trải qua đầy đủ cả 4 kiểu (ví dụ Việt Nam bỏ qua giai đoạn tư bản chủ nghĩa).</div>
 
-        <div class="q-title">Câu 18: Tính quy phạm phổ biến là đặc tính chỉ có ở pháp luật.</div>
-        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Chỉ có pháp luật mới được áp dụng trên phạm vi toàn quốc, lặp đi lặp lại nhiều lần trong không gian và thời gian, bắt buộc đối với tất cả mọi tổ chức và cá nhân.</div>
+        <div class="q-title">Câu 18: Quyền lực nhà nước được củng cố bởi các nguồn lực mạnh nhất bao gồm kinh tế, chính trị và tư tưởng.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 2]</span> Đây là biểu hiện của đặc trưng thiết lập quyền lực công cộng đặc biệt. Giai cấp nắm quyền dùng các nguồn lực này để áp đặt ý chí lên toàn bộ xã hội.</div>
 
-        <div class="q-title">Câu 19: Nhà nước có quyền ban hành pháp luật vì nhà nước là tổ chức duy nhất có quyền lực kinh tế.</div>
-        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Nhà nước có quyền ban hành pháp luật vì nhà nước là tổ chức đại diện cho quyền lực công cộng đặc biệt (quyền lực chính trị), là chủ thể duy nhất có quyền nhân danh toàn xã hội để quản lý xã hội.</div>
+        <div class="q-title">Câu 19: Việc nhà nước ban hành luật lệ để xử lý các hành vi trộm cắp là biểu hiện của tính giai cấp.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 4]</span> Việc xử lý trộm cắp nhằm bảo vệ bình yên cho cộng đồng chính là biểu hiện rõ nét của tính xã hội, phục vụ lợi ích chung.</div>
 
-        <div class="q-title">Câu 20: Quyết định của tổ chức Đảng là văn bản quy phạm pháp luật.</div>
-        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Quyết định của Đảng là văn bản của tổ chức chính trị, chỉ có hiệu lực bắt buộc đối với Đảng viên. Văn bản quy phạm pháp luật phải do cơ quan Nhà nước có thẩm quyền ban hành.</div>
+        <div class="q-title">Câu 20: Nhà nước là tổ chức duy nhất có quyền ban hành pháp luật.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 2]</span> Ban hành và quản lý bằng pháp luật là một trong 5 đặc trưng cơ bản. Nhà nước ban hành pháp luật để quản lý xã hội và duy trì trật tự.</div>
 
-        <h3>PHẦN B - MỤC 2: BẢN CHẤT CỦA NHÀ NƯỚC</h3>
+        <h3>PHẦN B - MỤC 2: BẢN CHẤT CỦA NHÀ NƯỚC (BÀI 4)</h3>
 
-        <div class="q-title">Câu 1: Bản chất giai cấp của nhà nước thực chất chỉ là một giai cấp nhất định nắm quyền lực nhà nước.</div>
-        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Bản chất nhà nước luôn bao gồm hai mặt thống nhất với nhau: Tính giai cấp (bảo vệ lợi ích giai cấp thống trị) và Tính xã hội (giải quyết các công việc chung của xã hội). Không thể chỉ nhìn nhận nhà nước ở khía cạnh giai cấp nắm quyền.</div>
+        <div class="q-title">Câu 1: Bản chất của nhà nước chỉ là những quy luật bên ngoài quyết định khuynh hướng phát triển của nhà nước.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 4]</span> Bản chất của nhà nước là toàn bộ những mối liên hệ, quan hệ sâu sắc và những quy luật bên trong quyết định những đặc điểm và khuynh hướng phát triển cơ bản của nhà nước.</div>
 
-        <div class="q-title">Câu 2: Nhà nước bảo vệ giai cấp thống trị nhưng trong chừng mực nhất định nó đồng thời bảo vệ lợi ích của xã hội nói chung.</div>
-        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Đây là biểu hiện của "tính xã hội" của nhà nước. Giai cấp thống trị chỉ có thể giữ vững quyền lực nếu nhà nước đó đảm bảo được một trật tự xã hội an toàn, xây dựng cơ sở hạ tầng, y tế, giáo dục... có lợi cho toàn cộng đồng.</div>
+        <div class="q-title">Câu 2: Bản chất giai cấp của nhà nước thực chất chỉ là bảo vệ lợi ích cho giai cấp cầm quyền.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 4]</span> Bản chất giai cấp không chỉ là bảo vệ lợi ích, mà trước hết là vì lợi ích của chính giai cấp thống trị, đồng thời là công cụ để duy trì sự thống trị và trấn áp các giai cấp đối kháng.</div>
 
-        <div class="q-title">Câu 3: Bản chất nhà nước và bản chất giai cấp của nhà nước là hai khái niệm đồng nhất.</div>
-        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Bản chất giai cấp chỉ là một mặt (dù là mặt cơ bản, quyết định) cấu thành nên bản chất nhà nước. Bản chất nhà nước rộng hơn vì nó bao hàm cả tính xã hội. Do đó, hai khái niệm này không đồng nhất.</div>
+        <div class="q-title">Câu 3: Bản chất nhà nước và bản chất giai cấp của nhà nước là hai khái niệm hoàn toàn đồng nhất.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 4]</span> Bản chất nhà nước luôn bao hàm hai mặt không thể tách rời: tính giai cấp và tính xã hội. Do đó, bản chất nhà nước là một khái niệm rộng hơn, không đồng nhất với bản chất giai cấp.</div>
 
-        <div class="q-title">Câu 4: Nhà nước là bộ máy dùng để duy trì sự thống trị của giai cấp này đối với giai cấp khác.</div>
-        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Theo lý luận Mác - Lênin, nhà nước là sản phẩm của những mâu thuẫn giai cấp không thể điều hòa được. Chức năng cốt lõi của nó là công cụ bạo lực thực hiện sự chuyên chính của giai cấp cầm quyền nhằm đàn áp sự phản kháng của các giai cấp bị trị.</div>
+        <div class="q-title">Câu 4: Nhà nước bảo vệ giai cấp thống trị nhưng trong chừng mực nhất định nó đồng thời bảo vệ lợi ích của xã hội nói chung.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 4]</span> Nhà nước không chỉ là bộ máy cai trị mà còn phải đại diện cho toàn xã hội để quản lý, giải quyết các công việc chung (y tế, giáo dục, làm đường) và bảo vệ trật tự chung.</div>
 
-        <div class="q-title">Câu 5: Tính xã hội của nhà nước chỉ tồn tại trong nhà nước xã hội chủ nghĩa.</div>
-        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Bất kỳ kiểu nhà nước nào (Chủ nô, Phong kiến, Tư sản, Xã hội chủ nghĩa) đều mang tính xã hội. Nếu một nhà nước không thực hiện chức năng xã hội thì nó không thể tồn tại được. Sự khác biệt chỉ nằm ở mức độ và bản chất của tính xã hội trong từng kiểu nhà nước.</div>
+        <div class="q-title">Câu 5: Tính xã hội của nhà nước chỉ tồn tại trong các nhà nước phúc lợi hiện đại.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: <span class="bold-blue">[Theo kiến thức Bài 4]</span> Tính giai cấp và tính xã hội luôn tồn tại song hành và tác động lẫn nhau trong bất kỳ quá trình hình thành và phát triển của nhà nước nào, từ chủ nô cho đến XHCN.</div>
 
     </div>
 </div>
@@ -531,12 +593,12 @@ mindmap
         startOnLoad: true, 
         theme: 'base',
         themeVariables: {
-            fontFamily: '"Patrick Hand", cursive', /* Kế thừa font chữ viết tay */
+            fontFamily: '"Patrick Hand", cursive', 
             primaryColor: '#ffffff',
-            primaryTextColor: '#1a56db', /* Chữ bút bi xanh */
+            primaryTextColor: '#1a56db', 
             primaryBorderColor: '#1a56db',
-            lineColor: '#d32f2f', /* Đường nối bút đỏ */
-            secondaryColor: '#ffeba1', /* Nhánh phụ màu highlight vàng */
+            lineColor: '#d32f2f', 
+            secondaryColor: '#ffeba1', 
             tertiaryColor: '#e4eaf5'
         }
     });
