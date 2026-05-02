@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sổ Tay Nội Dung Chi Tiết (Phần Pháp Luật) - Tập 1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --grid-size: 32px;
+            --page-padding-left: 75px;
+            --page-padding-right: 30px;
+            --margin-line-pos: 65px;
+            --base-font-size: 20px;
+            --h1-size: 26px;
+            --h2-size: 22px;
+            
+            --blue-pen: #1a56db;
+            --red-pen: #d32f2f;
+            --green-pen: #2e7d32;
+            --grid-line: #e4eaf5;
+            --margin-line: #ff9999;
+            --highlight: #ffeba1;
+            --dashed-line: #9bc1ff;
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --grid-size: 28px;
+                --page-padding-left: 40px;
+                --page-padding-right: 15px;
+                --margin-line-pos: 30px;
+                --base-font-size: 18px;
+                --h1-size: 22px;
+                --h2-size: 20px;
+            }
+        }
+
+        body {
+            margin: 0;
+            padding: 10px;
+            background-color: #d1d5db; 
+            font-family: 'Patrick Hand', cursive, sans-serif;
+            font-size: var(--base-font-size);
+            color: var(--blue-pen);
+            line-height: var(--grid-size); 
+        }
+
+        @media (min-width: 769px) {
+            body { padding: 20px; }
+        }
+
+        .notebook-page {
+            background-color: #fefefe;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            padding: calc(var(--grid-size) * 1) var(--page-padding-right) calc(var(--grid-size) * 2) var(--page-padding-left);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-radius: 4px;
+            overflow-x: hidden;
+            
+            background-image:
+                linear-gradient(var(--grid-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+            background-size: var(--grid-size) var(--grid-size);
+            background-position: 0 10px; 
+        }
+
+        .notebook-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: var(--margin-line-pos);
+            width: 1px;
+            background-color: var(--margin-line);
+            z-index: 1;
+        }
+
+        .tape {
+            position: absolute;
+            top: 15px;
+            right: 40px;
+            width: 80px;
+            height: 25px;
+            background-color: rgba(200, 200, 200, 0.5);
+            transform: rotate(-6deg);
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .tape {
+                width: 60px;
+                right: 20px;
+                top: 10px;
+                height: 20px;
+            }
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .date {
+            text-align: right;
+            color: #8899a6;
+            font-style: italic;
+            font-size: calc(var(--base-font-size) - 2px);
+            margin-bottom: calc(var(--grid-size) * 1);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--red-pen);
+            text-transform: uppercase;
+            font-weight: normal;
+            font-size: var(--h1-size);
+            letter-spacing: 1px;
+            margin: 0 0 calc(var(--grid-size) * 1) 0;
+            text-decoration: underline;
+            text-decoration-style: dashed;
+            text-underline-offset: 4px;
+            line-height: calc(var(--grid-size) * 1.5);
+        }
+
+        h2 {
+            color: var(--green-pen);
+            font-style: italic;
+            text-transform: uppercase;
+            font-weight: normal;
+            font-size: var(--h2-size);
+            margin: calc(var(--grid-size) * 1) 0 0 0;
+            display: inline-block;
+            border-bottom: 2px solid var(--green-pen);
+            line-height: calc(var(--grid-size) - 2px);
+        }
+
+        p, div { margin: 0; }
+
+        .arrow-item {
+            margin-top: 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .arrow {
+            color: var(--red-pen);
+            font-weight: bold;
+            margin-right: 8px;
+            font-size: var(--h2-size);
+        }
+
+        mark {
+            background-color: var(--highlight);
+            color: var(--blue-pen);
+            font-family: inherit;
+            padding: 0 4px;
+            border-radius: 3px;
+        }
+
+        .bold { font-weight: bold; }
+        .bold-blue { font-weight: bold; color: var(--blue-pen); }
+
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+            margin: 0 0 0 10px;
+            border-left: 2px dashed var(--dashed-line);
+        }
+
+        @media (max-width: 768px) {
+            ul {
+                padding-left: 15px; 
+                margin-left: 5px;
+            }
+        }
+
+        li { position: relative; }
+        li::before {
+            content: '- ';
+            position: absolute;
+            left: -15px;
+        }
+
+        .divider {
+            text-align: center;
+            color: #ccc;
+            letter-spacing: 3px;
+            margin: calc(var(--grid-size) * 0.5) 0;
+            font-family: monospace;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .mindmap-container {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: rgba(255, 235, 161, 0.15); 
+            border: 2px dashed var(--dashed-line);
+            border-radius: 10px;
+            text-align: center;
+            overflow-x: auto; 
+            -webkit-overflow-scrolling: touch; 
+        }
+
+        .practice-box {
+            background-color: rgba(26, 86, 219, 0.05);
+            border-left: 4px solid var(--blue-pen);
+            padding: 10px 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .q-title {
+            font-weight: bold;
+            color: var(--blue-pen);
+            margin-top: 10px;
+            line-height: var(--grid-size);
+        }
+        .q-ans-true { color: var(--green-pen); font-weight: bold; }
+        .q-ans-false { color: var(--red-pen); font-weight: bold; }
+        
+        h3 {
+            color: var(--red-pen);
+            font-family: 'Patrick Hand', cursive;
+            font-size: var(--h2-size);
+            text-decoration: underline;
+            text-decoration-style: dashed;
+            margin-top: var(--grid-size);
+            margin-bottom: 0;
+            line-height: calc(var(--grid-size) * 1.5);
+        }
+    </style>
+</head>
+<body>
+
+<div class="notebook-page">
+    <div class="tape"></div>
+    <div class="content">
+        <div class="date">Ngày học: Ngày 3</div>
+        
+        <h1>SỔ TAY NỘI DUNG CHI TIẾT (PHẦN PHÁP LUẬT)</h1>
+
+        <!-- CHƯƠNG 1 -->
+        <h2>I. VẤN ĐỀ CHUNG VỀ PHÁP LUẬT</h2>
+        
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold"><mark>1. Nguồn gốc của pháp luật:</mark></span> Phát sinh khi xã hội đạt trình độ nhất định.</div>
+        </div>
+        <ul>
+            <li><span class="bold-blue">Nguyên nhân khách quan:</span> Sự xuất hiện chế độ tư hữu và mâu thuẫn giai cấp gay gắt không thể điều hòa.</li>
+            <li><span class="bold-blue">Nguyên nhân chủ quan:</span> Hình thành bằng con đường do Nhà nước ban hành (đặt ra quy tắc mới) hoặc thừa nhận (nâng quy phạm xã hội lên thành luật).</li>
+        </ul>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">2. Bản chất của pháp luật:</span></div>
+        </div>
+        <ul>
+            <li><span class="bold">Tính giai cấp:</span> Thể hiện ý chí của giai cấp thống trị, là công cụ trấn áp, đấu tranh giai cấp.</li>
+            <li><span class="bold">Tính xã hội:</span> Đáp ứng nhu cầu quản lý trật tự chung, mô hình hóa cách thức xử sự.</li>
+            <li><span class="bold">Mối quan hệ:</span> Tương tác qua lại, không thể có kiểu pháp luật nào có tính giai cấp mà lại không có tính xã hội.</li>
+        </ul>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">3. Mối liên hệ với các hiện tượng xã hội khác:</span></div>
+        </div>
+        <ul>
+            <li><span class="bold">Với kinh tế:</span> Kinh tế quyết định pháp luật. Pháp luật tác động ngược lại (tích cực thúc đẩy, tiêu cực kìm hãm).</li>
+            <li><span class="bold">Với chính trị:</span> Chính trị quy định bản chất pháp luật. Pháp luật là công cụ chuyển hóa ý chí chính trị.</li>
+            <li><span class="bold">Với Nhà nước:</span> Quyền lực NN triển khai trên cơ sở PL. Nhà nước không thể cao hơn pháp luật.</li>
+            <li><span class="bold">Với quy phạm XH khác:</span> Hỗ trợ nhau nhưng đôi khi cũng có thể mâu thuẫn, xung đột (VD: tập quán tảo hôn trái PL).</li>
+        </ul>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">4. Thuộc tính (Đặc điểm) của pháp luật:</span></div>
+        </div>
+        <ul>
+            <li><span class="bold">Tính quy phạm phổ biến:</span> Bắt buộc chung, áp dụng nhiều lần, phạm vi toàn quốc.</li>
+            <li><span class="bold">Tính xác định chặt chẽ về hình thức:</span> Ngôn ngữ cụ thể, một nghĩa. Thẩm quyền, thủ tục ban hành nghiêm ngặt.</li>
+            <li><span class="bold">Tính được đảm bảo bằng Nhà nước:</span> Đặc trưng để phân biệt với quy phạm XH khác. Đảm bảo bằng biện pháp cưỡng chế.</li>
+        </ul>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">5. Chức năng và Hình thức:</span></div>
+        </div>
+        <ul>
+            <li><span class="bold">Chức năng:</span> Điều chỉnh, Giáo dục, Bảo vệ.</li>
+            <li><span class="bold">Hình thức:</span>
+                <ul>
+                    <li><span class="bold">Tập quán pháp:</span> Thừa nhận tập quán. Ưu: đa dạng, tự nguyện. Nhược: tản mạn, cục bộ.</li>
+                    <li><span class="bold">Tiền lệ pháp (Án lệ):</span> Thừa nhận quyết định xét xử. Ưu: linh hoạt lấp lỗ hổng. Nhược: do Thẩm phán tạo ra (thiếu tính lập pháp).</li>
+                    <li><span class="bold">VBQPPL:</span> Hình thức tiến bộ và phổ biến nhất, do cơ quan có thẩm quyền ban hành.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- VẬN DỤNG NHANH CHƯƠNG 1 -->
+        <div class="practice-box">
+            <div class="bold-blue" style="text-decoration: underline;">📝 Vận dụng nhanh Chương 1:</div>
+            
+            <div class="q-title">Pháp luật chỉ có thể được hình thành bằng con đường do nhà nước đặt ra các quy tắc mới.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Ngoài việc đặt ra quy tắc mới (ban hành), Nhà nước còn có thể thừa nhận những tập quán, quy phạm xã hội sẵn có để nâng lên thành luật.</div>
+
+            <div class="q-title">Chỉ pháp luật mới được đảm bảo bằng biện pháp cưỡng chế nhà nước.</div>
+            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Tính được đảm bảo bằng cưỡng chế nhà nước là đặc trưng cơ bản nhất để phân biệt pháp luật với các quy phạm xã hội khác (đạo đức, tôn giáo).</div>
+
+            <div class="q-title">Chỉ pháp luật mới có tính quy phạm.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Các quy phạm xã hội khác (đạo đức, tôn giáo, tập quán) cũng mang tính quy phạm (chuẩn mực hành vi), nhưng chỉ pháp luật mới có tính quy phạm "phổ biến" bắt buộc chung.</div>
+        </div>
+
+        <div class="divider">---------------------------------------------------</div>
+
+        <!-- CHƯƠNG 2 -->
+        <h2>II. QUY PHẠM PHÁP LUẬT</h2>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">1. Khái niệm và đặc điểm:</span> Quy phạm pháp luật (QPPL) là những quy tắc xử sự chung do nhà nước ban hành/thừa nhận và bảo đảm thực hiện. Nội dung luôn thể hiện 2 mặt là cho phép và bắt buộc.</div>
+        </div>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">2. Cơ cấu của Quy phạm pháp luật:</span> (Gồm 3 bộ phận)</div>
+        </div>
+        <ul>
+            <li><span class="bold">Giả định:</span> Nêu điều kiện, hoàn cảnh. Trả lời câu: "Chủ thể nào? Hoàn cảnh nào?".</li>
+            <li><span class="bold">Quy định:</span> Nêu cách thức xử sự (dứt khoát hoặc không dứt khoát). Trả lời câu: "Phải xử sự như thế nào?".</li>
+            <li><span class="bold">Chế tài:</span> Nêu biện pháp tác động dự kiến áp dụng. Trả lời câu: "Chịu hậu quả gì?". Gồm chế tài cố định và không cố định. (Khác với trách nhiệm pháp lý trên thực tế).</li>
+            <li><span class="bold">Lưu ý:</span> Không phải mọi QPPL đều có đủ 3 bộ phận, thường có thể khuyết phần chế tài do bản chất quan hệ tự do thỏa thuận.</li>
+        </ul>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">3. Phân loại & Phương thức thể hiện:</span></div>
+        </div>
+        <ul>
+            <li><span class="bold">Phân loại:</span> Theo mệnh lệnh (cấm, bắt buộc, trao quyền); Theo nội dung (định nghĩa, điều chỉnh, bảo vệ); Theo ngành luật...</li>
+            <li><span class="bold">Trong điều luật:</span> 1 điều luật có thể chứa 1 QPPL, nhiều QPPL, hoặc khái quát chung cho nhiều QPPL.</li>
+            <li><span class="bold">Theo nội dung thể hiện:</span> Thể hiện trực tiếp, viện dẫn, hoặc thể hiện mẫu.</li>
+        </ul>
+
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold-blue">4. Phân biệt QPPL và Quy phạm xã hội (QPXH) khác:</span></div>
+        </div>
+        <ul>
+            <li>QPPL do Nhà nước ban hành, QPXH từ đời sống, đạo lý.</li>
+            <li>QPPL bắt buộc chung, QPXH dựa trên tự giác, dư luận.</li>
+            <li>QPPL cưỡng chế bằng sức mạnh Nhà nước, QPXH không có cưỡng chế.</li>
+            <li>QPPL thể hiện bằng văn bản chặt chẽ, dễ sửa đổi; QPXH hình thành tự nhiên, ổn định, khó thay đổi.</li>
+        </ul>
+
+        <!-- VẬN DỤNG NHANH CHƯƠNG 2 -->
+        <div class="practice-box">
+            <div class="bold-blue" style="text-decoration: underline;">📝 Vận dụng nhanh Chương 2:</div>
+            
+            <div class="q-title">Mọi quy phạm pháp luật phải có đầy đủ 3 bộ phận: giả định, quy định, chế tài.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Tùy vào ý chí nhà làm luật và tính chất quan hệ, một QPPL có thể khuyết 1 hoặc 2 yếu tố (thường là khuyết chế tài), nhưng không thể khuyết cả 3.</div>
+
+            <div class="q-title">Chế tài của quy phạm pháp luật chính là biện pháp trách nhiệm pháp lý.</div>
+            <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Chế tài chỉ là biện pháp dự kiến được áp dụng ghi trong luật, còn trách nhiệm pháp lý / cưỡng chế nhà nước là biện pháp diễn ra trên thực tế đối với người vi phạm.</div>
+
+            <div class="q-title">Nhiều quy phạm pháp luật có thể được quy định trong 1 điều luật.</div>
+            <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Một điều luật có thể chứa nhiều QPPL khi cần bao quát nhiều khía cạnh hoặc nhiều chủ thể có chung quan hệ xã hội.</div>
+        </div>
+
+        <div class="divider">---------------------------------------------------</div>
+
+        <!-- MINDMAPS -->
+        <h2>III. SƠ ĐỒ TƯ DUY TỔNG KẾT</h2>
+        
+        <div class="arrow-item">
+            <span class="arrow">➔</span>
+            <div><span class="bold"><mark>Mindmap 1: Vấn đề chung về Pháp luật</mark></span></div>
+        </div>
+        <div class="mindmap-container">
+<pre class="mermaid">
+mindmap
+  root((Pháp luật))
+    Bản chất
+      Tính giai cấp
+      Tính xã hội
+    Thuộc tính
+      Quy phạm phổ biến
+      Xác định hình thức
+      Đảm bảo bằng NN
+    Chức năng
+      Điều chỉnh
+      Giáo dục
+      Bảo vệ
+    Hình thức
+      Tập quán pháp
+      Tiền lệ pháp
+      Văn bản QPPL
+</pre>
+        </div>
+
+        <div class="arrow-item" style="margin-top: 20px;">
+            <span class="arrow">➔</span>
+            <div><span class="bold"><mark>Mindmap 2: Quy phạm pháp luật</mark></span></div>
+        </div>
+        <div class="mindmap-container">
+<pre class="mermaid">
+mindmap
+  root((Cơ cấu<br/>QPPL))
+    Giả định
+      Ai?
+      Khi nào?
+      Hoàn cảnh?
+    Quy định
+      Được làm gì?
+      Phải làm gì?
+      Không được làm gì?
+    Chế tài
+      Hậu quả?
+      Biện pháp dự kiến?
+</pre>
+        </div>
+
+        <div class="divider">---------------------------------------------------</div>
+
+        <!-- PHẦN ÔN TẬP TỔNG HỢP (GỘP CẢ 2 FILE NHẬN ĐỊNH VÀ TỰ LUẬN) -->
+        <h2>IV. PHẦN ÔN TẬP TỔNG HỢP</h2>
+        <div style="font-style: italic; color: var(--red-pen); font-size: 16px; margin-bottom: 10px;">(Gộp toàn bộ nhận định và câu hỏi tự luận của Chương 1 & 2 từ các nguồn tài liệu)</div>
+
+        <!-- NHẬN ĐỊNH CHƯƠNG 1 -->
+        <h3>📚 1. NHẬN ĐỊNH VẤN ĐỀ CHUNG VỀ PHÁP LUẬT (23 CÂU)</h3>
+        
+        <div class="q-title">1. Tập quán và những tín điều tôn giáo trong thời kỳ cộng sản nguyên thủy chính là pháp luật bởi đó chính là những quy tắc xử sự hình thành trật tự của xã hội.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Pháp luật chỉ ra đời trong xã hội có Nhà nước; khi mâu thuẫn xã hội gay gắt dẫn tới hình thành Nhà nước thì pháp luật mới được ban hành.</div>
+
+        <div class="q-title">2. Pháp luật chỉ có thể được hình thành bằng con đường do nhà nước đặt ra các quy tắc mới.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Nhà nước còn có thể thừa nhận những tập quán, quy phạm xã hội sẵn có để nâng lên thành luật.</div>
+
+        <div class="q-title">3. Việc pháp luật đưa ra khuôn mẫu, chuẩn mực cho hành vi xử sự của con người thể hiện tính xác định chặt chẽ về hình thức của pháp luật.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Hình thức chặt chẽ thể hiện ở ngôn từ pháp lý. Việc đưa ra khuôn mẫu chuẩn mực thể hiện "tính quy phạm phổ biến".</div>
+
+        <div class="q-title">4. Án lệ (tiền lệ pháp) là hình thức pháp luật lạc hậu, thể hiện trình độ pháp lý thấp.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Rất nhiều nước tiến bộ (hệ thống Anh - Mỹ) vẫn tồn tại án lệ; nó thể hiện sự linh hoạt và khả năng thích ứng của pháp luật.</div>
+
+        <div class="q-title">5. Tập quán pháp và tiền lệ pháp có cùng điểm chung.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Cả hai đều dựa trên cơ sở các quy tắc xử sự đã tồn tại trong cuộc sống hoặc từ thực tiễn để hình thành các quy định pháp luật.</div>
+
+        <div class="q-title">6. Nền chính trị của giai cấp cầm quyền quy định bản chất, nội dung của pháp luật.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Cơ sở hạ tầng (kinh tế) mới là yếu tố quyết định nội dung, bản chất của pháp luật (vật chất quyết định ý thức).</div>
+
+        <div class="q-title">7. Lợi ích giai cấp thống trị luôn là sự ưu tiên và được lựa chọn có tính quyết định khi hình thành các quy định pháp luật.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Pháp luật là ý chí của giai cấp thống trị được nâng lên thành luật, nhằm bảo vệ trước hết lợi ích của giai cấp cầm quyền.</div>
+
+        <div class="q-title">8. Pháp luật luôn tác động tích cực đối với kinh tế, thúc đẩy kinh tế phát triển.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Pháp luật có thể tác động tích cực hoặc tiêu cực. Nếu không phản ánh đúng thực tiễn sẽ kìm hãm kinh tế.</div>
+
+        <div class="q-title">9. Pháp luật là chuẩn mực (tiêu chuẩn) duy nhất đánh giá hành vi con người.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Ngoài pháp luật còn có đạo đức, phong tục tập quán, tôn giáo và dư luận xã hội.</div>
+
+        <div class="q-title">10. Pháp luật chỉ mang tính giai cấp.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Pháp luật không chỉ mang tính giai cấp mà còn mang tính xã hội.</div>
+
+        <div class="q-title">11. Pháp luật là phương tiện mô hình hóa cách thức xử sự của con người.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Pháp luật buộc các chủ thể khi rơi vào điều kiện đã quy định thì phải thực hiện theo đúng yêu cầu.</div>
+
+        <div class="q-title">12. Chức năng giáo dục của pháp luật chỉ tồn tại trong xã hội XHCN.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Bất cứ nhà nước nào quản lý bằng pháp luật đều có chức năng giáo dục để hướng con người tuân thủ chuẩn mực.</div>
+
+        <div class="q-title">13. Pháp luật và các quy phạm xã hội khác luôn hỗ trợ nhau trong việc điều chỉnh các quan hệ xã hội.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Có thể xung đột, mâu thuẫn lẫn nhau (ví dụ: tập quán tảo hôn đi ngược lại với pháp luật).</div>
+
+        <div class="q-title">14. Chỉ pháp luật mới được đảm bảo bằng biện pháp cưỡng chế nhà nước.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Tính được đảm bảo bằng cưỡng chế nhà nước là đặc trưng để phân biệt pháp luật với các quy phạm xã hội khác.</div>
+
+        <div class="q-title">15. Chỉ pháp luật mới có tính quy phạm / Chỉ pháp luật mới mang tính giai cấp.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Các QPXH khác cũng mang tính quy phạm (chuẩn mực) và cũng mang tính giai cấp do tồn tại xã hội quyết định.</div>
+
+        <div class="q-title">16. Chức năng bảo vệ của pháp luật thể hiện ở việc pháp luật đảm bảo cho sự phát triển của các quan hệ xã hội.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Đảm bảo cho sự phát triển là chức năng điều chỉnh, còn chức năng bảo vệ thể hiện ở việc trừng phạt hành vi vi phạm.</div>
+
+        <div class="q-title">17. Pháp luật do Nhà nước ban hành và chỉ được thể hiện bằng hình thức văn bản quy phạm pháp luật.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Ngoài văn bản quy phạm pháp luật, pháp luật còn thể hiện dưới hình thức tập quán pháp và tiền lệ pháp.</div>
+
+        <div class="q-title">18. Tiền lệ pháp không phải là một hình thức pháp luật chính yếu ở Việt Nam.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Vì ở Việt Nam hình thức pháp luật chính yếu là văn bản quy phạm pháp luật.</div>
+
+        <div class="q-title">19. Trong lịch sử loài người chỉ có văn bản quy phạm pháp luật mới được coi là hình thức của pháp luật.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Lịch sử còn ghi nhận tập quán pháp và tiền lệ pháp.</div>
+
+        <div class="q-title">20. Tiền lệ pháp được hình thành từ cơ quan lập pháp.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Tiền lệ pháp được hình thành từ cơ quan tư pháp (tòa án) trong quá trình xét xử.</div>
+
+        <div class="q-title">21. Các quy phạm đạo đức không mang tính giai cấp.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Trong xã hội có giai cấp thì các quy phạm đạo đức cũng mang tính giai cấp do tồn tại xã hội quyết định ý thức xã hội.</div>
+
+        <div class="q-title">22. Pháp luật và pháp chế không thể tách rời và không phụ thuộc vào trình độ văn hoá của cán bộ, công dân.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Pháp luật và pháp chế muốn phát huy hiệu quả trên thực tế thì phụ thuộc rất lớn vào trình độ văn hoá pháp lý của mọi người.</div>
+
+        <div class="q-title">23. Bất kỳ quy phạm xã hội nào được Nhà nước cho phép tồn tại đều là quy phạm pháp luật.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Nhà nước cho phép tồn tại QPXH đạo đức, tôn giáo nhưng chúng không phải là QPPL vì không có tính bắt buộc chung và không cưỡng chế.</div>
+
+
+        <!-- NHẬN ĐỊNH CHƯƠNG 2 -->
+        <h3 style="margin-top: 30px;">📚 2. NHẬN ĐỊNH QUY PHẠM PHÁP LUẬT (11 CÂU)</h3>
+
+        <div class="q-title">1. Quy phạm pháp luật là quy tắc xử sự được áp dụng một lần trong đời sống xã hội.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: QPPL chứa quy tắc mang tính chung, được áp dụng nhiều lần, lặp đi lặp lại với mọi chủ thể.</div>
+
+        <div class="q-title">2. Một quy phạm pháp luật có thể khuyết 3 yếu tố: Giả định, quy định và chế tài.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Có thể khuyết 1 hoặc 2 yếu tố, nhưng không thể khuyết cả 3 yếu tố vì lúc đó sẽ không còn là một quy phạm nữa.</div>
+
+        <div class="q-title">3. Mọi quy phạm pháp luật phải có đầy đủ 3 bộ phận: giả định, quy định, chế tài.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Tùy vào ý chí nhà làm luật, một QPPL có thể không đầy đủ 3 bộ phận (thường thiếu chế tài).</div>
+
+        <div class="q-title">4. Chế tài của quy phạm pháp luật chính là biện pháp trách nhiệm pháp lý.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Chế tài là biện pháp dự kiến áp dụng, còn trách nhiệm pháp lý là biện pháp diễn ra trên thực tế đối với chủ thể vi phạm.</div>
+
+        <div class="q-title">5. Bộ phận chế tài trong quy phạm pháp luật chính là cưỡng chế nhà nước.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Chế tài là dự kiến áp dụng trong luật, còn cưỡng chế là biện pháp thực tế phải gánh chịu nếu vi phạm.</div>
+
+        <div class="q-title">6. Bộ phận quy định của quy phạm pháp luật là sự thể hiện ý chí của Nhà nước.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Bộ phận quy định mô hình hóa ý chí của Nhà nước, nêu lên cách thức xử sự chứa đựng mệnh lệnh của Nhà nước.</div>
+
+        <div class="q-title">7. Bộ phận giả định xác định phạm vi tác động của quy phạm pháp luật.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Giả định nêu lên các điều kiện, hoàn cảnh mà khi rơi vào đó cá nhân/tổ chức phải chịu sự tác động.</div>
+
+        <div class="q-title">8. Nhiều quy phạm pháp luật có thể được quy định trong 1 điều luật.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Một điều luật có thể chứa nhiều QPPL khi cần bao quát nhiều khía cạnh hoặc nhiều chủ thể.</div>
+
+        <div class="q-title">9. Quy phạm pháp luật là quy tắc mang tính bắt buộc.</div>
+        <div><span class="q-ans-true">ĐÁP ÁN: ĐÚNG.</span> Giải thích: Nó có hiệu lực bắt buộc chung, áp dụng cho mọi chủ thể.</div>
+
+        <div class="q-title">10. Quy phạm pháp luật là những quy tắc do Nhà nước và các tổ chức chính trị ban hành.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Chỉ do Nhà nước ban hành hoặc thừa nhận, tổ chức chính trị không có thẩm quyền ban hành pháp luật.</div>
+
+        <div class="q-title">11. Mọi quy phạm xã hội được Nhà nước cho phép tồn tại đều là quy phạm pháp luật.</div>
+        <div><span class="q-ans-false">ĐÁP ÁN: SAI.</span> Giải thích: Các QPXH được khuyến khích nhưng không bắt buộc chung và không cưỡng chế thì không phải là QPPL.</div>
+
+        <div class="divider">---------------------------------------------------</div>
+
+        <!-- CÂU HỎI TỰ LUẬN -->
+        <h2>V. CÁC CÂU HỎI TỰ LUẬN YÊU CẦU PHÂN TÍCH</h2>
+        <div style="font-style: italic; color: #8899a6; font-size: 16px; margin-bottom: 15px;">(Bạn có thể dựa vào phần lý thuyết bên trên để tự giải các đề bài này nhằm ôn tập chuyên sâu)</div>
+
+        <div class="practice-box">
+            <div class="bold-blue" style="text-decoration: underline; margin-bottom: 10px;">Chương 1: Vấn đề chung về pháp luật</div>
+            <ul style="border: none; padding-left: 0; margin-left: 0;">
+                <li>Nêu và phân tích nguyên nhân ra đời của pháp luật theo quan điểm Mác-Lênin.</li>
+                <li>Tính giai cấp và tính xã hội của pháp luật là gì? Vì sao pháp luật vừa có tính giai cấp vừa có tính xã hội? Nêu các biểu hiện.</li>
+                <li>Phân tích các thuộc tính (đặc điểm) của pháp luật.</li>
+                <li>So sánh pháp luật với đạo đức / phong tục tập quán và phân tích mối quan hệ giữa chúng.</li>
+                <li>Phân tích mối liên hệ giữa pháp luật với kinh tế, chính trị, nhà nước. Liên hệ với Việt Nam hiện nay.</li>
+                <li>Tại sao Nhà nước phải quản lý xã hội bằng pháp luật?</li>
+                <li>Tập quán pháp, tiền lệ pháp, và văn bản quy phạm pháp luật là gì? Phân tích ưu điểm và hạn chế của từng hình thức.</li>
+                <li>Tại sao VBQPPL lại là hình thức chủ yếu của pháp luật Việt Nam hiện nay?</li>
+                <li>Phân tích các đặc điểm, điểm tiến bộ của pháp luật tư sản so với phong kiến và đặc điểm của pháp luật XHCN.</li>
+            </ul>
+        </div>
+
+        <div class="practice-box">
+            <div class="bold-blue" style="text-decoration: underline; margin-bottom: 10px;">Chương 2: Quy phạm pháp luật</div>
+            <ul style="border: none; padding-left: 0; margin-left: 0;">
+                <li>Phân tích các đặc điểm của quy phạm pháp luật. Phân biệt QPPL với các quy phạm xã hội khác.</li>
+                <li>Phân tích mối liên hệ chặt chẽ giữa 3 bộ phận: giả định, quy định, và chế tài trong cơ cấu của quy phạm pháp luật.</li>
+                <li>Phân loại quy phạm pháp luật dựa vào tính chất mệnh lệnh, nội dung, tác dụng, đối tượng điều chỉnh.</li>
+                <li>Trình bày các phương thức thể hiện của quy phạm pháp luật.</li>
+                <li>Giải thích tại sao khi nhà làm luật xây dựng quy định dứt khoát, có khi lại xây dựng quy định không dứt khoát? Tại sao không xây dựng toàn bộ đều không dứt khoát?</li>
+                <li>Giải thích tại sao có khi nhà làm luật xây dựng chế tài cố định, có khi lại chế tài không cố định?</li>
+                <li><strong>Bài tập phân tích cơ cấu:</strong> Hãy xác định Giả định, Quy định, Chế tài trong các khoản: "Người tham gia giao thông phải đi bên phải theo chiều đi của mình..." và "Người điều khiển, người ngồi trên xe mô tô... phải đội mũ bảo hiểm...".</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ 
+        startOnLoad: true, 
+        theme: 'base',
+        themeVariables: {
+            fontFamily: '"Patrick Hand", cursive', 
+            primaryColor: '#ffffff',
+            primaryTextColor: '#1a56db', 
+            primaryBorderColor: '#1a56db',
+            lineColor: '#d32f2f', 
+            secondaryColor: '#ffeba1', 
+            tertiaryColor: '#e4eaf5'
+        }
+    });
+</script>
+
+</body>
+</html>
